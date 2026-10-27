@@ -27,6 +27,9 @@ export async function POST(request: Request) {
   if (!experience) return NextResponse.json({ error: "Experience not found." }, { status: 404 });
 
   const { booking } = experience;
+  if (booking.kind === "walk-in") {
+    return NextResponse.json({ error: "This venue doesn't take reservations." }, { status: 400 });
+  }
   const guests = Number(body.guests);
   if (!Number.isInteger(guests) || guests < 1 || guests > booking.maxGuests) {
     return NextResponse.json({ error: `Choose between 1 and ${booking.maxGuests}.` }, { status: 400 });

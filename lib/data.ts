@@ -90,7 +90,12 @@ export type Booking =
   // Recurring availability: guest picks a date and a time slot
   | { kind: "slot"; times: string[]; maxGuests: number; unit: string }
   // Fixed-date event: guest picks a ticket type and quantity
-  | { kind: "event"; date: string; tickets: { name: string; price: number }[]; maxGuests: number };
+  | { kind: "event"; date: string; tickets: { name: string; price: number }[]; maxGuests: number }
+  // No reservations taken: shown as information only
+  | { kind: "walk-in"; hours: string };
+
+export type BookableExperience = Experience & { booking: Exclude<Booking, { kind: "walk-in" }> };
+export const isBookable = (e: Experience): e is BookableExperience => e.booking.kind !== "walk-in";
 
 export type Experience = {
   slug: string;
@@ -232,6 +237,21 @@ export const experiences: Experience[] = [
     highlights: ["Three-, four- or five-course menus", "Seasonal and local", "Game and sustainable fish"],
     image: img("1555396273-367ea4eb4db5"),
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
+  },
+  {
+    slug: "de-zingende-zwaan",
+    category: "dining",
+    group: "bistros",
+    title: "De Zingende Zwaan",
+    venue: "Helmersbuurt",
+    city: "Amsterdam",
+    priceNote: "Walk-in only · no reservations",
+    summary: "A cosy brown café with French and British bistro cooking, from oysters to fish and chips.",
+    description:
+      "On the Eerste Helmersstraat, De Zingende Zwaan pairs the feel of a traditional brown café with a London twist. The seasonal menu brings French and British bistro classics such as oysters with Chablis, fish and chips and burgers, at prices that are friendly for Amsterdam.",
+    highlights: ["French and British bistro classics", "Oysters and Chablis", "Walk-in only, open from the afternoon"],
+    image: img("1572116469696-31de0f17cc34"),
+    booking: { kind: "walk-in", hours: "Open daily from 15:30. No reservations: just walk in." },
   },
   {
     slug: "cafe-twee-prinsen",

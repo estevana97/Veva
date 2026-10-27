@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Photo from "@/components/Photo";
 import ReservationForm from "@/components/ReservationForm";
-import { experiences, formatEuro, getCategory, getExperience, points, reservationPoints } from "@/lib/data";
+import { experiences, formatEuro, getCategory, getExperience, isBookable, points, reservationPoints } from "@/lib/data";
 
 type Props = { params: { category: string; slug: string } };
 
@@ -60,22 +60,36 @@ export default function ExperiencePage({ params }: Props) {
 
         <aside className="lg:sticky lg:top-20 lg:self-start">
           <div className="border border-line p-6 sm:p-8">
-            {experience.priceFrom !== undefined ? (
-              <p className="font-serif text-2xl">
-                from {formatEuro(experience.priceFrom)}{" "}
-                <span className="font-sans text-sm text-muted">{experience.priceNote}</span>
-              </p>
+            {experience.booking.kind === "walk-in" ? (
+              <>
+                <p className="font-serif text-2xl">
+                  Walk-in only <span className="block font-sans text-sm text-muted">This venue doesn&apos;t take reservations.</span>
+                </p>
+                <p className="mt-6 text-sm">{experience.booking.hours}</p>
+                <p className="mt-6 border-l-2 border-ink pl-3 text-xs leading-relaxed">
+                  Still earn {points.perEuro} Véva Point per €1 you spend: upload your receipt in the Véva app after your visit.
+                </p>
+              </>
             ) : (
-              <p className="font-serif text-2xl">
-                Reserve a table <span className="block font-sans text-sm text-muted">{experience.priceNote}</span>
-              </p>
+              <>
+                {experience.priceFrom !== undefined ? (
+                  <p className="font-serif text-2xl">
+                    from {formatEuro(experience.priceFrom)}{" "}
+                    <span className="font-sans text-sm text-muted">{experience.priceNote}</span>
+                  </p>
+                ) : (
+                  <p className="font-serif text-2xl">
+                    Reserve a table <span className="block font-sans text-sm text-muted">{experience.priceNote}</span>
+                  </p>
+                )}
+                <p className="mt-3 border-l-2 border-ink pl-3 text-xs leading-relaxed">
+                  Earn <strong>{reservationPoints(experience)} Véva Points</strong> for booking
+                  {experience.premium && " (incl. premium bonus)"}, plus {points.perEuro} Véva Point per €1 you spend at the
+                  venue.
+                </p>
+                {isBookable(experience) && <ReservationForm experience={experience} />}
+              </>
             )}
-            <p className="mt-3 border-l-2 border-ink pl-3 text-xs leading-relaxed">
-              Earn <strong>{reservationPoints(experience)} Véva Points</strong> for booking
-              {experience.premium && " (incl. premium bonus)"}, plus {points.perEuro} Véva Point per €1 you spend at the
-              venue.
-            </p>
-            <ReservationForm experience={experience} />
           </div>
         </aside>
       </div>

@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import BookingQr from "@/components/BookingQr";
-import { formatEuro, type Experience } from "@/lib/data";
+import { formatEuro, type BookableExperience } from "@/lib/data";
 
 type Confirmation = { reference: string; total: number; points: number; summary: string };
 
 const today = () => new Date().toISOString().slice(0, 10);
 
-export default function ReservationForm({ experience }: { experience: Experience }) {
+export default function ReservationForm({ experience }: { experience: BookableExperience }) {
   const { booking } = experience;
   const isEvent = booking.kind === "event";
 
