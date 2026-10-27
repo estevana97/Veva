@@ -65,8 +65,8 @@ export default function ExperiencePage({ params }: Props) {
               <span className="font-sans text-sm text-muted">{experience.priceNote}</span>
             </p>
             <p className="mt-3 border-l-2 border-ink pl-3 text-xs leading-relaxed">
-              Earn <strong>{reservationPoints(experience)} LuxPoints</strong> for booking
-              {experience.premium && " (incl. premium bonus)"}, plus {points.perEuro} LuxPoint per €1 you spend at the
+              Earn <strong>{reservationPoints(experience)} Véva Points</strong> for booking
+              {experience.premium && " (incl. premium bonus)"}, plus {points.perEuro} Véva Point per €1 you spend at the
               venue.
             </p>
             <ReservationForm experience={experience} />

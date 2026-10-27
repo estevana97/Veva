@@ -6,11 +6,11 @@ import { experiences, images } from "@/lib/data";
 export const metadata: Metadata = { title: "Join the community" };
 
 const features = [
-  ["Your profile", "Keep track of your reservations, the LuxPoints you've earned and the experiences you've enjoyed."],
+  ["Your profile", "Keep track of your reservations, the Véva Points you've earned and the experiences you've enjoyed."],
   ["Share moments", "Post photos, reviews and updates from your bookings, much like Instagram or Strava, but for experiences."],
   ["Follow & engage", "Follow people with similar tastes, like and comment on their experiences, and discover where to go next."],
-  ["Challenges", "Take on challenges such as five starred dinners in a month or a race and a spa day, and earn bonus LuxPoints."],
-  ["Invite friends", "Earn bonus LuxPoints for every friend who joins and makes their first reservation."],
+  ["Challenges", "Take on challenges such as five starred dinners in a month or a race and a spa day, and earn bonus Véva Points."],
+  ["Invite friends", "Earn bonus Véva Points for every friend who joins and makes their first reservation."],
   ["Plan together", "Invite friends to a reservation, so everyone has the details and earns points."],
 ];
 
@@ -70,7 +70,7 @@ export default function CommunityPage() {
               <span className="font-medium">Maria</span> Seven courses at the counter, and the service was faultless.
               The langoustine course was unforgettable.
             </p>
-            <p className="text-xs text-muted">24 likes · 5 comments · earned 300 LuxPoints</p>
+            <p className="text-xs text-muted">24 likes · 5 comments · earned 300 Véva Points</p>
           </div>
         </article>
       </section>

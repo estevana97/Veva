@@ -72,12 +72,12 @@ export default function ReservationForm({ experience }: { experience: Experience
         </p>
         <p>Estimated total: {formatEuro(confirmation.total)}</p>
         <p>
-          You earned <strong>{confirmation.points} LuxPoints</strong> for this reservation.
+          You earned <strong>{confirmation.points} Véva Points</strong> for this reservation.
         </p>
         <div className="flex items-center gap-4 border-t border-line pt-4">
           <BookingQr reference={confirmation.reference} />
           <p className="text-xs leading-relaxed text-muted">
-            Show this QR code at the venue. When it&apos;s scanned at payment, you earn 1 LuxPoint for every €1 you
+            Show this QR code at the venue. When it&apos;s scanned at payment, you earn 1 Véva Point for every €1 you
             spend, and your visit becomes a verified experience you can share.
           </p>
         </div>

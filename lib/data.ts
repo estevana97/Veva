@@ -9,7 +9,7 @@ export const images = {
   about: img("1414235077428-338989a2e8c0"),
 };
 
-// LuxPoints rules
+// Véva Points rules
 export const points = {
   perReservation: 50, // earned for every booking, regardless of spend
   premiumBonus: 50, // extra for premium bookings such as chef's tables
@@ -105,7 +105,7 @@ export type Experience = {
   description: string;
   highlights: string[];
   image: string;
-  premium?: boolean; // earns the premium LuxPoints bonus
+  premium?: boolean; // earns the premium Véva Points bonus
   booking: Booking;
 };
 
@@ -361,7 +361,7 @@ export const experiences: Experience[] = [
     summary: "A social doubles tournament for members, with dinner and prizes.",
     description:
       "Compete in a relaxed but competitive doubles tournament for all levels, followed by a dinner and prize ceremony in the clubhouse.",
-    highlights: ["Matched by level", "Dinner and drinks included", "Bonus LuxPoints for the winners"],
+    highlights: ["Matched by level", "Dinner and drinks included", "Bonus Véva Points for the winners"],
     image: img("1612872087720-bb876e2e67d1"),
     booking: {
       kind: "event",
@@ -643,12 +643,12 @@ export const tiers: Tier[] = [
   {
     id: "silver",
     name: "Silver circle",
-    points: "0 – 999 LuxPoints",
+    points: "0 – 999 Véva Points",
     summary:
       "The entry point to Véva's exclusive world, offering a taste of premium perks for those beginning their journey with curated experiences.",
     perks: [
-      "50 LuxPoints for every reservation",
-      "1 LuxPoint for every €1 spent at the venue",
+      "50 Véva Points for every reservation",
+      "1 Véva Point for every €1 spent at the venue",
       "Redeem points for discounts on future bookings",
       "Share verified experiences with the community",
     ],
@@ -658,12 +658,12 @@ export const tiers: Tier[] = [
   {
     id: "gold",
     name: "Gold elite",
-    points: "1,000 – 4,999 LuxPoints",
+    points: "1,000 – 4,999 Véva Points",
     summary:
       "A step into refined exclusivity, rewarding frequent users with enhanced access and personalised touches for unforgettable moments.",
     perks: [
       "Everything in Silver circle",
-      "25% bonus LuxPoints on every booking",
+      "25% bonus Véva Points on every booking",
       "Early access to high-demand tables, tee times and race starts",
       "Gift or transfer points to friends and family",
       "Personalised recommendations",
@@ -674,12 +674,12 @@ export const tiers: Tier[] = [
   {
     id: "diamond",
     name: "Diamond vanguard",
-    points: "5,000+ LuxPoints",
+    points: "5,000+ Véva Points",
     summary:
       "The pinnacle of Véva exclusivity, reserved for the most discerning members who demand the finest in curated leisure.",
     perks: [
       "Everything in Gold elite",
-      "50% bonus LuxPoints on every booking",
+      "50% bonus Véva Points on every booking",
       "Personal concierge for reservations",
       "Exclusive reservations and private experiences: backstage passes, private viewings, VIP packages",
       "Invitations to members-only Véva events",

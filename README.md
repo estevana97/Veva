@@ -7,7 +7,7 @@ A social reservation platform with a loyalty program for curated experiences in 
 - **Culture**: museums & art, theatre/opera/concerts, festivals & galas
 - **Wellness**: spa & treatments, yoga & mindfulness, personal training
 
-Members earn **LuxPoints** for every reservation (plus a premium bonus) and for what they spend at the venue,
+Members earn **Véva Points** for every reservation (plus a premium bonus) and for what they spend at the venue,
 confirmed with a personal QR code. Verified visits can be shared with the community.
 
 Built with **Next.js 14 (App Router)**, **TypeScript** and **Tailwind CSS**. Ready for **Vercel**.
@@ -38,7 +38,7 @@ npm run dev        # http://localhost:3000
 | What | File |
 | --- | --- |
 | Categories, groups, experiences, prices, time slots, tickets, images | `lib/data.ts` |
-| LuxPoints rules (per booking, premium bonus, per euro) | `lib/data.ts` (`points`) |
+| Véva Points rules (per booking, premium bonus, per euro) | `lib/data.ts` (`points`) |
 | Reward tiers and perks | `lib/data.ts` (`tiers`) |
 | Colours, fonts, button styles | `tailwind.config.ts`, `app/globals.css` |
 | Navigation links | `components/Navbar.tsx` |
@@ -52,8 +52,8 @@ paths like `/images/golf.jpg`.
 - `/` home: hero, categories, how it works, rewards teaser
 - `/experiences`: "Our experiences" overview
 - `/experiences/[category]`: experiences grouped by type, with type and city filters
-- `/experiences/[category]/[slug]`: detail page with reservation form, LuxPoints and QR code
-- `/rewards`: how to earn and use LuxPoints, Silver circle, Gold elite, Diamond vanguard
+- `/experiences/[category]/[slug]`: detail page with reservation form, Véva Points and QR code
+- `/rewards`: how to earn and use Véva Points, Silver circle, Gold elite, Diamond vanguard
 - `/community`: app download, verified sharing, profiles, challenges and waitlist
 - `/about` (incl. benefits for partner venues), `/contact`, `/login`
 

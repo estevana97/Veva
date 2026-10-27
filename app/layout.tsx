@@ -10,7 +10,7 @@ const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   title: { default: "Véva — Curated experiences in the Netherlands", template: "%s · Véva" },
   description:
-    "Véva is your social and reservation platform for high-end dining, sports, culture and wellness experiences in the Netherlands. Book, earn LuxPoints and share verified experiences.",
+    "Véva is your social and reservation platform for high-end dining, sports, culture and wellness experiences in the Netherlands. Book, earn Véva Points and share verified experiences.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Rewards program" };
 const earnSteps = [
   {
     title: "Reserve",
-    text: `Earn ${points.perReservation} LuxPoints as soon as you book through Véva, whatever you spend. Premium bookings such as chef's tables earn a ${points.premiumBonus}-point bonus.`,
+    text: `Earn ${points.perReservation} Véva Points as soon as you book through Véva, whatever you spend. Premium bookings such as chef's tables earn a ${points.premiumBonus}-point bonus.`,
   },
   {
     title: "Scan",
@@ -15,7 +15,7 @@ const earnSteps = [
   },
   {
     title: "Spend",
-    text: `After your visit, earn ${points.perEuro} LuxPoint for every €1 you spend. No QR scan? Upload a photo of your receipt in the app.`,
+    text: `After your visit, earn ${points.perEuro} Véva Point for every €1 you spend. No QR scan? Upload a photo of your receipt in the app.`,
   },
 ];
 
@@ -29,7 +29,7 @@ const redeem = [
   ["Discounts", "Use your points for discounts on future reservations, up to 50% off a table at a high-end restaurant."],
   ["Exclusive experiences", "Unlock private viewings, backstage passes and VIP packages that aren't for sale."],
   ["Gift to friends", "Transfer points to friends or family to treat them to an experience of their choice."],
-  ["Refer and earn", "Earn bonus LuxPoints for every friend who joins and makes their first reservation."],
+  ["Refer and earn", "Earn bonus Véva Points for every friend who joins and makes their first reservation."],
 ];
 
 export default function RewardsPage() {
@@ -40,7 +40,7 @@ export default function RewardsPage() {
       <section className="container-page pb-20 pt-10 text-center sm:pt-14">
         <h1 className="text-5xl sm:text-7xl">Véva rewards</h1>
         <p className="lead mx-auto mt-8 max-w-xl">
-          Unlock exclusive perks with Véva Rewards, tailored to your passion for premium experiences. Earn LuxPoints
+          Unlock exclusive perks with Véva Rewards, tailored to your passion for premium experiences. Earn Véva Points
           when you book curated dining, sports, cultural and wellness experiences, and again for what you spend at the
           venue. Enjoy priority reservations, special packages and personalised recommendations to elevate every
           moment with those you value most.
@@ -62,7 +62,7 @@ export default function RewardsPage() {
 
       {/* Earning */}
       <section className="container-page mt-32">
-        <h2 className="text-center text-3xl">Two ways to earn LuxPoints</h2>
+        <h2 className="text-center text-3xl">Two ways to earn Véva Points</h2>
         <p className="lead mx-auto mt-4 max-w-xl text-center">
           You&apos;re rewarded for choosing a venue through Véva, and for the experience itself.
         </p>
@@ -88,7 +88,7 @@ export default function RewardsPage() {
             ))}
             <div className="flex justify-between gap-4 border-t border-line pt-3 font-serif text-lg">
               <dt>Total</dt>
-              <dd>{total} LuxPoints</dd>
+              <dd>{total} Véva Points</dd>
             </div>
           </dl>
         </div>

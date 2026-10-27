@@ -27,7 +27,7 @@ export default function AboutPage() {
             </p>
             <p>
               Véva is more than a reservation tool; it&apos;s a lifestyle hub. Book a round of golf and dinner at a
-              starred restaurant nearby, earn LuxPoints for both, and use them anywhere in our network.
+              starred restaurant nearby, earn Véva Points for both, and use them anywhere in our network.
             </p>
             <p>
               And because every experience shared on Véva is linked to a real reservation, our community is built on

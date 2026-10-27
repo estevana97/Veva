@@ -46,8 +46,8 @@ export default function HomePage() {
       {/* How it works */}
       <section className="container-page mt-28 grid gap-10 border-y border-line py-16 text-center md:grid-cols-3">
         {[
-          ["Reserve", "Book a table, tee time, start number, show or spa treatment in a few clicks, and earn LuxPoints straight away."],
-          ["Scan & enjoy", "Show your personal QR code at the venue and earn 1 LuxPoint for every euro you spend."],
+          ["Reserve", "Book a table, tee time, start number, show or spa treatment in a few clicks, and earn Véva Points straight away."],
+          ["Scan & enjoy", "Show your personal QR code at the venue and earn 1 Véva Point for every euro you spend."],
           ["Share", "Share your verified experiences with friends and followers, and discover where they go next."],
         ].map(([title, text], i) => (
           <div key={title}>
@@ -62,7 +62,7 @@ export default function HomePage() {
       <section className="container-page mt-28 text-center">
         <h2 className="text-3xl">Véva rewards</h2>
         <p className="lead mx-auto mt-4 max-w-xl">
-          Earn LuxPoints when you book and again when you spend. Use them across every partner, or rise from Silver
+          Earn Véva Points when you book and again when you spend. Use them across every partner, or rise from Silver
           to Diamond for early access, exclusive reservations and a personal concierge.
         </p>
         <div className="mx-auto mt-10 flex max-w-md justify-center gap-4">
