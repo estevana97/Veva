@@ -2,7 +2,7 @@
 
 A social reservation platform with a loyalty program for curated experiences in the Netherlands:
 
-- **Dining**: fine dining & chef's tables, pop-ups & brunch, wine & culinary
+- **Dining** (Amsterdam): fine dining, bistros & brasseries, wine bars & tapas
 - **Sports**: races (marathons, triathlons) and recreational (golf, padel, tennis)
 - **Culture**: museums & art, theatre/opera/concerts, festivals & galas
 - **Wellness**: spa & treatments, yoga & mindfulness, personal training

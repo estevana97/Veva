@@ -15,7 +15,9 @@ export default function ExperienceCard({ experience: e }: { experience: Experien
       </div>
       <div className="mt-5 flex items-baseline justify-between gap-4">
         <h3 className="text-xl">{e.title}</h3>
-        <span className="shrink-0 text-xs text-muted">from {formatEuro(e.priceFrom)}</span>
+        <span className="shrink-0 text-xs text-muted">
+          {e.priceFrom !== undefined ? `from ${formatEuro(e.priceFrom)}` : "Free reservation"}
+        </span>
       </div>
       <p className="mt-1 text-xs uppercase tracking-wider text-muted">
         {e.venue} · {e.city}

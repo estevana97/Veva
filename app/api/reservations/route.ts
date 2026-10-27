@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     if (!body.time || !booking.times.includes(body.time)) {
       return NextResponse.json({ error: "Please choose an available time." }, { status: 400 });
     }
-    unitPrice = experience.priceFrom;
+    unitPrice = experience.priceFrom ?? 0; // 0 = free table reservation, paid at the venue
     summary = `${experience.title} at ${experience.venue}, ${experience.city} on ${body.date} at ${body.time} for ${guests}.`;
   }
 

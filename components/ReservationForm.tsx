@@ -26,7 +26,7 @@ export default function ReservationForm({ experience }: { experience: Experience
   const unitPrice = isEvent
     ? booking.tickets.find((t) => t.name === ticket)?.price ?? 0
     : experience.priceFrom;
-  const total = unitPrice * guests;
+  const total = (unitPrice ?? 0) * guests;
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -70,7 +70,7 @@ export default function ReservationForm({ experience }: { experience: Experience
         <p>
           Reference: <span className="font-medium">{confirmation.reference}</span>
         </p>
-        <p>Estimated total: {formatEuro(confirmation.total)}</p>
+        <p>{confirmation.total > 0 ? `Estimated total: ${formatEuro(confirmation.total)}` : "You pay at the venue."}</p>
         <p>
           You earned <strong>{confirmation.points} Véva Points</strong> for this reservation.
         </p>
@@ -162,8 +162,8 @@ export default function ReservationForm({ experience }: { experience: Experience
       </div>
 
       <div className="flex items-center justify-between border-t border-line pt-4 text-sm">
-        <span className="text-muted">Estimated total</span>
-        <span className="font-serif text-lg">{formatEuro(total)}</span>
+        <span className="text-muted">{unitPrice !== undefined ? "Estimated total" : "Reservation"}</span>
+        <span className="font-serif text-lg">{unitPrice !== undefined ? formatEuro(total) : "Free"}</span>
       </div>
 
       {error && <p className="text-sm text-red-700">{error}</p>}

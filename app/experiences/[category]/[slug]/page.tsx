@@ -60,10 +60,16 @@ export default function ExperiencePage({ params }: Props) {
 
         <aside className="lg:sticky lg:top-20 lg:self-start">
           <div className="border border-line p-6 sm:p-8">
-            <p className="font-serif text-2xl">
-              from {formatEuro(experience.priceFrom)}{" "}
-              <span className="font-sans text-sm text-muted">{experience.priceNote}</span>
-            </p>
+            {experience.priceFrom !== undefined ? (
+              <p className="font-serif text-2xl">
+                from {formatEuro(experience.priceFrom)}{" "}
+                <span className="font-sans text-sm text-muted">{experience.priceNote}</span>
+              </p>
+            ) : (
+              <p className="font-serif text-2xl">
+                Reserve a table <span className="block font-sans text-sm text-muted">{experience.priceNote}</span>
+              </p>
+            )}
             <p className="mt-3 border-l-2 border-ink pl-3 text-xs leading-relaxed">
               Earn <strong>{reservationPoints(experience)} Véva Points</strong> for booking
               {experience.premium && " (incl. premium bonus)"}, plus {points.perEuro} Véva Point per €1 you spend at the

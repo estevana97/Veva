@@ -15,7 +15,7 @@ const features = [
 ];
 
 export default function CommunityPage() {
-  const post = experiences.find((e) => e.slug === "chefs-table-amsterdam") ?? experiences[0];
+  const post = experiences.find((e) => e.slug === "signature-spa-ritual") ?? experiences[0];
 
   return (
     <>
@@ -67,10 +67,10 @@ export default function CommunityPage() {
           </div>
           <div className="space-y-2 p-4 text-sm">
             <p>
-              <span className="font-medium">Maria</span> Seven courses at the counter, and the service was faultless.
-              The langoustine course was unforgettable.
+              <span className="font-medium">Maria</span> Two hours of pure calm, then tea in the thermal area with a
+              view of the dunes. Already booked my next visit.
             </p>
-            <p className="text-xs text-muted">24 likes · 5 comments · earned 300 Véva Points</p>
+            <p className="text-xs text-muted">24 likes · 5 comments · earned 265 Véva Points</p>
           </div>
         </article>
       </section>

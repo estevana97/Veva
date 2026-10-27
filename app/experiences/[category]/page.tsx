@@ -51,16 +51,18 @@ export default function CategoryPage({ params, searchParams }: Props) {
             </Link>
           ))}
         </div>
-        <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
-          <Link href={href({ city: undefined })} className={chip(!city)} scroll={false}>
-            All cities
-          </Link>
-          {cities.map((c) => (
-            <Link key={c} href={href({ city: c })} className={chip(city === c)} scroll={false}>
-              {c}
+        {cities.length > 1 && (
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+            <Link href={href({ city: undefined })} className={chip(!city)} scroll={false}>
+              All cities
             </Link>
-          ))}
-        </div>
+            {cities.map((c) => (
+              <Link key={c} href={href({ city: c })} className={chip(city === c)} scroll={false}>
+                {c}
+              </Link>
+            ))}
+          </div>
+        )}
 
         {groups.map((g) => {
           const list = all.filter((e) => e.group === g.id && (!city || e.city === city));
