@@ -10,8 +10,8 @@ export default function HomePage() {
         <div className="order-2 lg:order-1">
           <h1 className="text-3xl leading-tight sm:text-4xl">One platform for all your curated experiences</h1>
           <p className="lead mt-3 max-w-lg">
-            Véva is your social and reservation platform, connecting you with (high-end) dining, sports, sport events
-            and cultural experiences in the Netherlands to share special moments with those you value most.
+            Véva is your social and reservation platform, connecting you with (high-end) dining, sports, culture and
+            wellness experiences in the Netherlands to share special moments with those you value most.
           </p>
           <Link href="/experiences" className="btn-outline mt-12">
             Explore now
@@ -46,9 +46,9 @@ export default function HomePage() {
       {/* How it works */}
       <section className="container-page mt-28 grid gap-10 border-y border-line py-16 text-center md:grid-cols-3">
         {[
-          ["Discover", "Browse a hand-picked selection of restaurants, courts, races, museums and festivals."],
-          ["Reserve", "Book a table, tee time or start number in a few clicks, with instant confirmation."],
-          ["Share & earn", "Invite the people you value and earn rewards with every experience."],
+          ["Reserve", "Book a table, tee time, start number, show or spa treatment in a few clicks, and earn LuxPoints straight away."],
+          ["Scan & enjoy", "Show your personal QR code at the venue and earn 1 LuxPoint for every euro you spend."],
+          ["Share", "Share your verified experiences with friends and followers, and discover where they go next."],
         ].map(([title, text], i) => (
           <div key={title}>
             <p className="font-serif text-sm text-muted">0{i + 1}</p>
@@ -62,8 +62,8 @@ export default function HomePage() {
       <section className="container-page mt-28 text-center">
         <h2 className="text-3xl">Véva rewards</h2>
         <p className="lead mx-auto mt-4 max-w-xl">
-          The more you book, the more you earn. Rise from Silver to Diamond and unlock priority reservations and
-          personalised perks.
+          Earn LuxPoints when you book and again when you spend. Use them across every partner, or rise from Silver
+          to Diamond for early access, exclusive reservations and a personal concierge.
         </p>
         <div className="mx-auto mt-10 flex max-w-md justify-center gap-4">
           {tiers.map((t) => (

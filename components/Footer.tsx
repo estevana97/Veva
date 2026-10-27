@@ -8,7 +8,7 @@ export default function Footer() {
         <div>
           <p className="font-serif text-2xl">Véva</p>
           <p className="mt-3 max-w-xs text-muted">
-            Curated dining, sports and cultural experiences in the Netherlands.
+            Curated dining, sports, culture and wellness experiences in the Netherlands.
           </p>
         </div>
         <div>

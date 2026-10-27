@@ -5,7 +5,7 @@ import ExperienceCard from "@/components/ExperienceCard";
 import PageHeader from "@/components/PageHeader";
 import { categories, getCategory, getExperiences } from "@/lib/data";
 
-type Props = { params: { category: string }; searchParams: { city?: string } };
+type Props = { params: { category: string }; searchParams: { city?: string; type?: string } };
 
 export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
@@ -21,8 +21,17 @@ export default function CategoryPage({ params, searchParams }: Props) {
 
   const all = getExperiences(category.slug);
   const cities = Array.from(new Set(all.map((e) => e.city))).sort();
-  const city = searchParams.city;
-  const list = city ? all.filter((e) => e.city === city) : all;
+  const { city, type } = searchParams;
+  const groups = category.groups.filter((g) => !type || g.id === type);
+
+  const href = (next: { city?: string; type?: string }) => {
+    const q = new URLSearchParams();
+    const merged = { city, type, ...next };
+    if (merged.type) q.set("type", merged.type);
+    if (merged.city) q.set("city", merged.city);
+    const s = q.toString();
+    return `/experiences/${category.slug}${s ? `?${s}` : ""}`;
+  };
 
   const chip = (active: boolean) =>
     `border px-3 py-1 text-xs transition-colors ${active ? "border-ink bg-ink text-white" : "border-line hover:border-ink"}`;
@@ -33,24 +42,49 @@ export default function CategoryPage({ params, searchParams }: Props) {
 
       <div className="container-page">
         <div className="flex flex-wrap items-center justify-center gap-2">
-          <Link href={`/experiences/${category.slug}`} className={chip(!city)} scroll={false}>
+          <Link href={href({ type: undefined })} className={chip(!type)} scroll={false}>
+            Everything
+          </Link>
+          {category.groups.map((g) => (
+            <Link key={g.id} href={href({ type: g.id })} className={chip(type === g.id)} scroll={false}>
+              {g.name}
+            </Link>
+          ))}
+        </div>
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+          <Link href={href({ city: undefined })} className={chip(!city)} scroll={false}>
             All cities
           </Link>
           {cities.map((c) => (
-            <Link key={c} href={`/experiences/${category.slug}?city=${encodeURIComponent(c)}`} className={chip(city === c)} scroll={false}>
+            <Link key={c} href={href({ city: c })} className={chip(city === c)} scroll={false}>
               {c}
             </Link>
           ))}
         </div>
 
-        <div className="mt-12 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {list.map((e) => (
-            <ExperienceCard key={e.slug} experience={e} />
-          ))}
-        </div>
-        {list.length === 0 && <p className="mt-12 text-center text-muted">No experiences in this city yet.</p>}
+        {groups.map((g) => {
+          const list = all.filter((e) => e.group === g.id && (!city || e.city === city));
+          if (list.length === 0) return null;
+          return (
+            <section key={g.id} id={g.id} className="mt-20 scroll-mt-20">
+              <div className="border-b border-line pb-4">
+                <h2 className="text-3xl">{g.name}</h2>
+                <p className="mt-1 text-sm text-muted">{g.intro}</p>
+              </div>
+              <div className="mt-10 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+                {list.map((e) => (
+                  <ExperienceCard key={e.slug} experience={e} />
+                ))}
+              </div>
+            </section>
+          );
+        })}
 
-        <div className="mt-20 flex flex-wrap justify-center gap-3">
+        {groups.every((g) => !all.some((e) => e.group === g.id && (!city || e.city === city))) && (
+          <p className="mt-16 text-center text-muted">No experiences match these filters yet.</p>
+        )}
+
+        <div className="mt-24 flex flex-wrap justify-center gap-3">
           {categories
             .filter((c) => c.slug !== category.slug)
             .map((c) => (

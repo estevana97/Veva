@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getExperience } from "@/lib/data";
+import { getExperience, reservationPoints } from "@/lib/data";
 
 type Body = {
   category?: string;
@@ -57,8 +57,10 @@ export async function POST(request: Request) {
   const total = unitPrice * guests;
   const reference = `VEV-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
 
-  // TODO: persist the reservation (e.g. Vercel Postgres / Supabase) and send a confirmation email.
+  // TODO: persist the reservation (e.g. Vercel Postgres / Supabase), a confirmation email,
+  // and credit spend points when the venue scans the QR code (or the guest uploads a receipt).
   console.log("New reservation", { reference, experience: experience.slug, ...body, total });
 
-  return NextResponse.json({ reference, total, points: total, summary });
+  // Reservation points are earned now; spend points follow once the venue scans the QR code.
+  return NextResponse.json({ reference, total, points: reservationPoints(experience), summary });
 }

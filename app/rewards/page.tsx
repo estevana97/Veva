@@ -1,18 +1,49 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { tiers } from "@/lib/data";
+import { points, tiers } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Rewards program" };
 
+const earnSteps = [
+  {
+    title: "Reserve",
+    text: `Earn ${points.perReservation} LuxPoints as soon as you book through Véva, whatever you spend. Premium bookings such as chef's tables earn a ${points.premiumBonus}-point bonus.`,
+  },
+  {
+    title: "Scan",
+    text: "Every booking comes with a personal QR code. Show it at the venue so your visit is confirmed and linked to your bill.",
+  },
+  {
+    title: "Spend",
+    text: `After your visit, earn ${points.perEuro} LuxPoint for every €1 you spend. No QR scan? Upload a photo of your receipt in the app.`,
+  },
+];
+
+const example = [
+  ["Reservation at a Michelin-starred restaurant", points.perReservation],
+  ["Premium bonus for a chef's table", points.premiumBonus],
+  ["Spend of €200 confirmed by QR scan", 200 * points.perEuro],
+] as const;
+
+const redeem = [
+  ["Discounts", "Use your points for discounts on future reservations, up to 50% off a table at a high-end restaurant."],
+  ["Exclusive experiences", "Unlock private viewings, backstage passes and VIP packages that aren't for sale."],
+  ["Gift to friends", "Transfer points to friends or family to treat them to an experience of their choice."],
+  ["Refer and earn", "Earn bonus LuxPoints for every friend who joins and makes their first reservation."],
+];
+
 export default function RewardsPage() {
+  const total = example.reduce((sum, [, p]) => sum + p, 0);
+
   return (
     <>
       <section className="container-page pb-20 pt-10 text-center sm:pt-14">
         <h1 className="text-5xl sm:text-7xl">Véva rewards</h1>
         <p className="lead mx-auto mt-8 max-w-xl">
-          Unlock exclusive perks with Véva Rewards, tailored to your passion for premium experiences. The more you book
-          curated dining, sports, and cultural adventures, the more you earn—enjoy priority reservations, special
-          packages, and personalised recommendations to elevate every moment with those you value most.
+          Unlock exclusive perks with Véva Rewards, tailored to your passion for premium experiences. Earn LuxPoints
+          when you book curated dining, sports, cultural and wellness experiences, and again for what you spend at the
+          venue. Enjoy priority reservations, special packages and personalised recommendations to elevate every
+          moment with those you value most.
         </p>
       </section>
 
@@ -29,23 +60,59 @@ export default function RewardsPage() {
         ))}
       </section>
 
+      {/* Earning */}
       <section className="container-page mt-32">
-        <h2 className="text-center text-3xl">How it works</h2>
-        <div className="mx-auto mt-10 grid max-w-4xl gap-10 text-center sm:grid-cols-3">
-          {[
-            ["Book", "Reserve any experience through Véva."],
-            ["Earn", "Collect points for every euro you spend."],
-            ["Enjoy", "Climb the tiers and unlock new privileges."],
-          ].map(([title, text]) => (
+        <h2 className="text-center text-3xl">Two ways to earn LuxPoints</h2>
+        <p className="lead mx-auto mt-4 max-w-xl text-center">
+          You&apos;re rewarded for choosing a venue through Véva, and for the experience itself.
+        </p>
+        <div className="mx-auto mt-12 grid max-w-5xl gap-10 text-center sm:grid-cols-3">
+          {earnSteps.map((s, i) => (
+            <div key={s.title}>
+              <p className="font-serif text-sm text-muted">0{i + 1}</p>
+              <h3 className="mt-2 text-xl">{s.title}</h3>
+              <p className="lead mt-2">{s.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mx-auto mt-16 max-w-xl border border-line p-6 sm:p-8">
+          <p className="label">Example</p>
+          <p className="text-sm">Maria books a chef&apos;s table for Saturday evening and pays €200 for dinner.</p>
+          <dl className="mt-5 space-y-2 text-sm">
+            {example.map(([label, p]) => (
+              <div key={label} className="flex justify-between gap-4">
+                <dt className="text-ink/80">{label}</dt>
+                <dd>+{p}</dd>
+              </div>
+            ))}
+            <div className="flex justify-between gap-4 border-t border-line pt-3 font-serif text-lg">
+              <dt>Total</dt>
+              <dd>{total} LuxPoints</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      {/* Redeeming */}
+      <section className="container-page mt-28">
+        <h2 className="text-center text-3xl">Use your points</h2>
+        <div className="mx-auto mt-12 grid max-w-5xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {redeem.map(([title, text]) => (
             <div key={title}>
               <h3 className="text-xl">{title}</h3>
               <p className="lead mt-2">{text}</p>
             </div>
           ))}
         </div>
+        <p className="mx-auto mt-10 max-w-xl text-center text-xs text-muted">
+          Points earned at one partner can be used at any other partner across all categories.
+        </p>
       </section>
 
+      {/* Tiers */}
       <section className="container-page mt-28 space-y-6">
+        <h2 className="pb-4 text-center text-3xl">Membership levels</h2>
         {tiers.map((t) => (
           <div key={t.id} id={t.id} className="grid scroll-mt-20 gap-8 border-t border-line pt-10 md:grid-cols-[220px_1fr]">
             <div>

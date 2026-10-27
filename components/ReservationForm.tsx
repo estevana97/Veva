@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import BookingQr from "@/components/BookingQr";
 import { formatEuro, type Experience } from "@/lib/data";
 
 type Confirmation = { reference: string; total: number; points: number; summary: string };
@@ -69,8 +70,17 @@ export default function ReservationForm({ experience }: { experience: Experience
         <p>
           Reference: <span className="font-medium">{confirmation.reference}</span>
         </p>
-        <p>Total: {formatEuro(confirmation.total)}</p>
-        <p className="text-muted">You earned {confirmation.points} Véva reward points. A confirmation has been sent to {email}.</p>
+        <p>Estimated total: {formatEuro(confirmation.total)}</p>
+        <p>
+          You earned <strong>{confirmation.points} LuxPoints</strong> for this reservation.
+        </p>
+        <div className="flex items-center gap-4 border-t border-line pt-4">
+          <BookingQr reference={confirmation.reference} />
+          <p className="text-xs leading-relaxed text-muted">
+            Show this QR code at the venue. When it&apos;s scanned at payment, you earn 1 LuxPoint for every €1 you
+            spend, and your visit becomes a verified experience you can share.
+          </p>
+        </div>
         <button className="btn-small mt-2" onClick={() => setConfirmation(null)}>
           Make another reservation
         </button>
