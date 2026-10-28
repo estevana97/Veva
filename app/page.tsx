@@ -10,8 +10,9 @@ export default function HomePage() {
         <div className="order-2 lg:order-1">
           <h1 className="text-3xl leading-tight sm:text-4xl">One platform for all your curated experiences</h1>
           <p className="lead mt-3 max-w-lg">
-            Véva is your social and reservation platform, connecting you with (high-end) dining, sports, culture and
-            wellness experiences in the Netherlands to share special moments with those you value most.
+            Véva brings together the experiences that shape who you are, from chef’s tables and cultural activities to
+            sports races and wellness. Book them in one place, share them with the people who move you forward, and get
+            rewarded for every experience.
           </p>
           <Link href="/experiences" className="btn-outline mt-12">
             Explore now
