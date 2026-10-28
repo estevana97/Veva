@@ -39,7 +39,7 @@ export const categories: Category[] = [
     label: "Amsterdam restaurants",
     intro:
       "Reserve tables at a hand-picked selection of Amsterdam's best restaurants, from Michelin-starred dining and a greenhouse kitchen to French bistros, wine bars and tapas.",
-    image: img("1517248135467-4c7edcad34c4"),
+    image: "/images/categories/dining.jpg",
     groups: [
       { id: "fine-dining", name: "Fine dining", intro: "Michelin-starred cooking and seasonal tasting menus." },
       { id: "bistros", name: "Bistros & brasseries", intro: "French classics, rotisserie and modern Dutch cooking." },
@@ -52,7 +52,7 @@ export const categories: Category[] = [
     label: "Races & recreational",
     intro:
       "Secure your start at marathons and iron-distance triathlons, or book tee times, padel and tennis courts at the Netherlands' finest clubs.",
-    image: img("1535131749006-b7f58c99034b"),
+    image: "/images/categories/sports.jpg",
     groups: [
       { id: "races", name: "Races", intro: "Marathons, triathlons and Ironman-distance races, with hospitality packages." },
       { id: "recreational", name: "Recreational", intro: "Golf, padel and tennis: courts, tee times, lessons and tournaments." },
@@ -64,7 +64,7 @@ export const categories: Category[] = [
     label: "Art, stage & festivals",
     intro:
       "Private museum tours and art viewings, the best seats at the theatre, opera and concerts, and VIP access to festivals and galas.",
-    image: img("1518998053901-5348d3961a04"),
+    image: "/images/categories/culture.jpg",
     groups: [
       { id: "museums-art", name: "Museums & art", intro: "Private tours, skip-the-line access, private viewings and workshops." },
       { id: "performances", name: "Theatre, opera & concerts", intro: "Premium seats and private boxes for live performances." },
@@ -77,7 +77,7 @@ export const categories: Category[] = [
     label: "Health & wellbeing",
     intro:
       "Restore body and mind with exclusive spa treatments, private sauna suites, yoga and breathwork day retreats, and personal training.",
-    image: img("1544161515-4ab6ce6db874"),
+    image: "/images/categories/wellness.jpg",
     groups: [
       { id: "spa", name: "Spa & treatments", intro: "Signature massages, facials and private wellness suites." },
       { id: "mind", name: "Yoga & mindfulness", intro: "Yoga, breathwork and meditation sessions and day retreats." },
