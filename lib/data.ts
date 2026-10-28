@@ -365,7 +365,7 @@ export const experiences: Experience[] = [
     description:
       "The European Marathon Classics bring together eight of Europe's great city marathons. Finish five of them, each in a different city, and you earn the series medal, with space for a badge from every race you complete. There is no time limit. Véva helps you plan your route, keeps track of your progress and rewards every finish.",
     highlights: ["Five of eight marathons, each in a different city", "No time limit", `${points.challengeStage} bonus Véva Points per marathon`],
-    image: "/images/challenges/road-to-european-marathon-classics-medal.jpg",
+    image: "/images/challenges/european-marathon-classics-medals.jpg",
     booking: { kind: "join" },
     website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
     stagesTitle: "The eight marathons",
