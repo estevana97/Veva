@@ -570,7 +570,7 @@ export const experiences: Experience[] = [
     description:
       "Swim 1.9 km in Hoorn's old harbour on the Markermeer, ride a flat 90 km loop through the West Frisian countryside past villages and windmills, and run 21.1 km through the historic town centre. A great first IRONMAN-branded race.",
     highlights: ["1.9 km swim, 90 km bike, 21.1 km run", "Swim in Hoorn's historic harbour", "Flat, scenic course"],
-    image: img("1588952159215-a4b39193464e"),
+    image: "/images/races/ironman-70-3-westfriesland.jpg",
     booking: {
       kind: "external",
       when: "Usually held in June. The 2027 edition is listed for 20 June; check the official website.",
@@ -590,7 +590,7 @@ export const experiences: Experience[] = [
     description:
       "One of Europe's longest-running iron-distance races, held on the flat polder roads around Almere. Choose the full distance or the middle distance. The race runs under the Challenge brand rather than IRONMAN, with the same full distance.",
     highlights: ["Full and middle distance", "Flat polder course", "Full distance: 226 km in total"],
-    image: img("1530549387789-4c1017266635"),
+    image: "/images/races/challenge-almere-amsterdam.jpg",
     booking: {
       kind: "external",
       when: "Usually held in September. The 2027 edition is expected on 11 September; check the official website.",
