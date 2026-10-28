@@ -48,9 +48,8 @@ Restaurant photos live in `public/images/restaurants/` (named after the restaura
 images are Unsplash URLs. To replace a photo, add a file under `public/images/` and set `image` in
 `lib/data.ts` to a path like `/images/restaurants/troef.jpg`.
 
-The home page background video is `public/videos/home-hero.mp4` (+ `.webm` fallback and
-`public/images/home-hero-poster.jpg` still). The current clip is a watermarked Filmsupply preview: replace these
-files with the licensed version (same file names) before launch.
+The home page background video is `public/videos/home-hero-aerial.mp4` (+ `.webm` fallback and
+`public/images/home-hero-aerial-poster.jpg` still), set in `lib/data.ts` (`homeVideo`).
 
 Restaurant pages show a "Véva circle" block with member numbers. Fill them in per restaurant with
 `memberStats: { visits: 120, recommend: 96 }` in `lib/data.ts`; until then they show `[x]`.

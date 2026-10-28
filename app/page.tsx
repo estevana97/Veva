@@ -24,7 +24,7 @@ export default function HomePage() {
           <source src={images.homeVideo.webm} type="video/webm" />
         </video>
         {/* Darker on the left so the text stays readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" />
 
         <div className="container-page relative py-24">
           <h1 className="max-w-xl text-3xl leading-tight sm:text-4xl">One platform for all your curated experiences</h1>
