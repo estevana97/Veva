@@ -5,21 +5,40 @@ import { categories, images, tiers } from "@/lib/data";
 export default function HomePage() {
   return (
     <>
-      {/* Hero: text left, tall image right */}
-      <section className="container-page grid items-center gap-10 pt-8 lg:min-h-[calc(100vh-3rem)] lg:grid-cols-2 lg:gap-16 lg:pt-10">
-        <div className="order-2 lg:order-1">
-          <h1 className="text-3xl leading-tight sm:text-4xl">One platform for all your curated experiences</h1>
-          <p className="lead mt-3 max-w-lg">
+      {/* Hero: full-width background video with white text */}
+      <section
+        className="relative flex min-h-[560px] items-center overflow-hidden bg-cover bg-center text-white lg:min-h-[calc(100vh-3rem)]"
+        style={{ backgroundImage: `url(${images.homeVideo.poster})` }}
+      >
+        <video
+          className="hero-video absolute inset-0 h-full w-full object-cover"
+          poster={images.homeVideo.poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden
+        >
+          <source src={images.homeVideo.mp4} type="video/mp4" />
+          <source src={images.homeVideo.webm} type="video/webm" />
+        </video>
+        {/* Darker on the left so the text stays readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/10" />
+
+        <div className="container-page relative py-24">
+          <h1 className="max-w-2xl text-4xl leading-tight sm:text-5xl">One platform for all your curated experiences</h1>
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/90 sm:text-[15px]">
             Véva brings together the experiences that shape who you are, from chef’s tables and cultural activities to
             sports races and wellness. Book them in one place, share them with the people who move you forward, and get
             rewarded for every experience.
           </p>
-          <Link href="/experiences" className="btn-outline mt-12">
+          <Link
+            href="/experiences"
+            className="mt-10 inline-flex items-center justify-center border border-white px-8 py-2 font-serif text-lg text-white transition-colors hover:bg-white hover:text-ink"
+          >
             Explore now
           </Link>
-        </div>
-        <div className="relative order-1 mx-auto aspect-[4/5] w-[75%] lg:order-2 lg:mr-0 lg:aspect-auto lg:h-[calc((100vh-6rem)*0.7)] lg:w-[70%]">
-          <Photo src={images.homeHero} alt="Friends raising glasses of champagne and red wine outdoors" className="object-[50%_75%]" priority sizes="(min-width: 1024px) 35vw, 75vw" />
         </div>
       </section>
 

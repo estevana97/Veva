@@ -4,7 +4,8 @@ const img = (id: string, w = 1600) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 
 export const images = {
-  homeHero: "/images/home-hero-cheers.jpg",
+  // Home page background video (replace the file with the licensed version before launch)
+  homeVideo: { mp4: "/videos/home-hero.mp4", webm: "/videos/home-hero.webm", poster: "/images/home-hero-poster.jpg" },
   community: img("1528605248644-14dd04022da1"),
   about: img("1414235077428-338989a2e8c0"),
 };

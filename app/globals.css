@@ -16,6 +16,13 @@
   }
 }
 
+/* Respect reduced-motion settings: show the still image instead of the video */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+}
+
 @layer components {
   .container-page {
     @apply mx-auto w-full max-w-[1440px] px-5 sm:px-10 lg:px-16;
