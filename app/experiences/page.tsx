@@ -20,8 +20,8 @@ export default function ExperiencesPage() {
                 className="transition-transform duration-700 group-hover:scale-[1.03]"
               />
             </Link>
-            <p className="lead mt-10 max-w-md">{c.intro}</p>
-            <ul className="mt-5 flex flex-1 flex-wrap content-start justify-center gap-x-4 gap-y-1 text-xs text-muted">
+            <p className="lead mt-10 max-w-md flex-1">{c.intro}</p>
+            <ul className="mt-5 flex min-h-[2.25rem] flex-wrap content-start justify-center gap-x-4 gap-y-1 text-xs text-muted">
               {c.groups.map((g) => (
                 <li key={g.id}>
                   <Link href={`/experiences/${c.slug}?type=${g.id}`} className="hover:text-ink hover:underline">
