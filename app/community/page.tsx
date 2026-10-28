@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import HeroVideo from "@/components/HeroVideo";
 import Photo from "@/components/Photo";
 import NewsletterForm from "@/components/NewsletterForm";
 import { experiences, images } from "@/lib/data";
@@ -19,20 +20,18 @@ export default function CommunityPage() {
 
   return (
     <>
-      <section className="container-page grid items-center gap-12 pt-12 lg:min-h-[calc(100vh-3rem)] lg:grid-cols-2 lg:pt-20">
-        <div>
-          <h1 className="max-w-xl text-3xl leading-snug sm:text-4xl">
-            It all starts with the Véva app, your gateway to experiences.
-          </h1>
-          {/* Replace href with your App Store / Google Play links */}
-          <a href="#download" className="btn-solid mt-6">
-            Download here
-          </a>
-        </div>
-        <div className="relative mx-auto aspect-[2/3] w-full max-w-lg">
-          <Photo src={images.community} alt="A glass raised against the setting sun" priority sizes="(min-width: 1024px) 40vw, 100vw" />
-        </div>
-      </section>
+      <HeroVideo video={images.communityVideo}>
+        <h1 className="max-w-xl text-3xl leading-tight sm:text-4xl">
+          It all starts with the Véva app, your gateway to experiences.
+        </h1>
+        {/* Replace href with your App Store / Google Play links */}
+        <a
+          href="#download"
+          className="mt-8 inline-flex items-center justify-center border border-white bg-white px-7 py-2 font-serif text-base text-ink transition-colors hover:bg-transparent hover:text-white"
+        >
+          Download here
+        </a>
+      </HeroVideo>
 
       {/* Authenticity */}
       <section className="container-page mt-28 grid items-center gap-14 lg:grid-cols-2">

@@ -6,6 +6,7 @@ const img = (id: string, w = 1600) =>
 export const images = {
   // Home page background video
   homeVideo: { mp4: "/videos/home-hero-aerial.mp4", webm: "/videos/home-hero-aerial.webm", poster: "/images/home-hero-aerial-poster.jpg" },
+  communityVideo: { mp4: "/videos/community-hero.mp4", webm: "/videos/community-hero.webm", poster: "/images/community-hero-poster.jpg" },
   community: img("1528605248644-14dd04022da1"),
   about: img("1414235077428-338989a2e8c0"),
 };

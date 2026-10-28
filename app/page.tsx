@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HeroVideo from "@/components/HeroVideo";
 import Photo from "@/components/Photo";
 import { categories, images, tiers } from "@/lib/data";
 
@@ -6,41 +7,20 @@ export default function HomePage() {
   return (
     <>
       {/* Hero: full-width background video with white text */}
-      <section
-        className="relative flex min-h-[560px] items-center overflow-hidden bg-cover bg-center text-white lg:min-h-[calc(100vh-3rem)]"
-        style={{ backgroundImage: `url(${images.homeVideo.poster})` }}
-      >
-        <video
-          className="hero-video absolute inset-0 h-full w-full object-cover"
-          poster={images.homeVideo.poster}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden
+      <HeroVideo video={images.homeVideo}>
+        <h1 className="max-w-xl text-3xl leading-tight sm:text-4xl">One platform for all your curated experiences</h1>
+        <p className="mt-4 max-w-lg text-[13px] leading-relaxed text-white/90 sm:text-sm">
+          Véva brings together the experiences that shape who you are, from chef’s tables and cultural activities to
+          sports races and wellness. Book them in one place, share them with the people who move you forward, and get
+          rewarded for every experience.
+        </p>
+        <Link
+          href="/experiences"
+          className="mt-8 inline-flex items-center justify-center border border-white px-7 py-2 font-serif text-base text-white transition-colors hover:bg-white hover:text-ink"
         >
-          <source src={images.homeVideo.mp4} type="video/mp4" />
-          <source src={images.homeVideo.webm} type="video/webm" />
-        </video>
-        {/* Darker on the left so the text stays readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" />
-
-        <div className="container-page relative py-24">
-          <h1 className="max-w-xl text-3xl leading-tight sm:text-4xl">One platform for all your curated experiences</h1>
-          <p className="mt-4 max-w-lg text-[13px] leading-relaxed text-white/90 sm:text-sm">
-            Véva brings together the experiences that shape who you are, from chef’s tables and cultural activities to
-            sports races and wellness. Book them in one place, share them with the people who move you forward, and get
-            rewarded for every experience.
-          </p>
-          <Link
-            href="/experiences"
-            className="mt-8 inline-flex items-center justify-center border border-white px-7 py-2 font-serif text-base text-white transition-colors hover:bg-white hover:text-ink"
-          >
-            Explore now
-          </Link>
-        </div>
-      </section>
+          Explore now
+        </Link>
+      </HeroVideo>
 
       {/* Categories */}
       <section className="container-page mt-28">
