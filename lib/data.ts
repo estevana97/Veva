@@ -23,7 +23,8 @@ export const reservationPoints = (e: Experience) =>
 
 export type CategorySlug = "dining" | "sports" | "culture" | "wellness";
 
-export type Group = { id: string; name: string; intro: string; subgroups?: { id: string; name: string; intro: string }[] };
+export type Subgroup = { id: string; name: string; intro: string; image: string };
+export type Group = { id: string; name: string; intro: string; subgroups?: Subgroup[] };
 
 export type Category = {
   slug: CategorySlug;
@@ -62,9 +63,9 @@ export const categories: Category[] = [
         name: "Races",
         intro: "Official marathons, triathlons and cycling classics in the Netherlands.",
         subgroups: [
-          { id: "marathon", name: "Marathon", intro: "The great city marathons of the Netherlands." },
-          { id: "triathlon", name: "Triathlon", intro: "IRONMAN and iron-distance triathlons in the Netherlands." },
-          { id: "cycling", name: "Cycling", intro: "Ride the classics on the hills of Limburg." },
+          { id: "marathon", name: "Marathon", intro: "The great city marathons of the Netherlands.", image: img("1452626038306-9aae5e071dd3") },
+          { id: "triathlon", name: "Triathlon", intro: "IRONMAN and iron-distance triathlons in the Netherlands.", image: "/images/challenges/road-to-your-first-ironman.jpg" },
+          { id: "cycling", name: "Cycling", intro: "Ride the classics on the hills of Limburg.", image: img("1541625602330-2277a4c46182") },
         ],
       },
       { id: "recreational", name: "Recreational", intro: "Golf, padel and tennis: courts, tee times and lessons." },

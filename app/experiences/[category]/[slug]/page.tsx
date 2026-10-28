@@ -38,7 +38,14 @@ export default function ExperiencePage({ params }: Props) {
           <>
             {" / "}
             <Link href={`/experiences/${category.slug}?type=${group.id}`} className="hover:underline">{group.name}</Link>
-            {subgroup && <>{" / "}{subgroup.name}</>}
+            {subgroup && (
+              <>
+                {" / "}
+                <Link href={`/experiences/${category.slug}?type=${group.id}&sub=${subgroup.id}`} className="hover:underline">
+                  {subgroup.name}
+                </Link>
+              </>
+            )}
           </>
         )}
       </nav>

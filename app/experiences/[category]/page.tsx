@@ -2,10 +2,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ExperienceCard from "@/components/ExperienceCard";
+import Photo from "@/components/Photo";
 import PageHeader from "@/components/PageHeader";
 import { categories, getCategory, getExperiences } from "@/lib/data";
 
-type Props = { params: { category: string }; searchParams: { city?: string; type?: string } };
+type Props = { params: { category: string }; searchParams: { city?: string; type?: string; sub?: string } };
 
 export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
@@ -21,13 +22,15 @@ export default function CategoryPage({ params, searchParams }: Props) {
 
   const all = getExperiences(category.slug);
   const cities = Array.from(new Set(all.map((e) => e.city))).sort();
-  const { city, type } = searchParams;
+  const { city, type, sub } = searchParams;
   const groups = category.groups.filter((g) => !type || g.id === type);
 
-  const href = (next: { city?: string; type?: string }) => {
+  // Changing the group clears the subsection; changing the city keeps it
+  const href = (next: { city?: string; type?: string; sub?: string }) => {
     const q = new URLSearchParams();
-    const merged = { city, type, ...next };
+    const merged = { city, type, sub: "type" in next ? undefined : sub, ...next };
     if (merged.type) q.set("type", merged.type);
+    if (merged.sub) q.set("sub", merged.sub);
     if (merged.city) q.set("city", merged.city);
     const s = q.toString();
     return `/experiences/${category.slug}${s ? `?${s}` : ""}`;
@@ -74,21 +77,56 @@ export default function CategoryPage({ params, searchParams }: Props) {
                 <p className="mt-1 text-sm text-muted">{g.intro}</p>
               </div>
               {g.subgroups ? (
-                g.subgroups.map((sg) => {
-                  const items = list.filter((e) => e.subgroup === sg.id);
-                  if (items.length === 0) return null;
-                  return (
-                    <div key={sg.id} id={sg.id} className="mt-12 scroll-mt-20">
-                      <h3 className="text-2xl">{sg.name}</h3>
-                      <p className="mt-1 text-sm text-muted">{sg.intro}</p>
-                      <div className="mt-8 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-                        {items.map((e) => (
-                          <ExperienceCard key={e.slug} experience={e} />
-                        ))}
+                (() => {
+                  const open = g.subgroups.find((sg) => sg.id === sub);
+                  // One subsection opened: show its races
+                  if (open) {
+                    const items = list.filter((e) => e.subgroup === open.id);
+                    return (
+                      <div className="mt-10">
+                        <Link href={href({ type: g.id, sub: undefined })} className="text-sm text-muted hover:text-ink" scroll={false}>
+                          ← All {g.name.toLowerCase()}
+                        </Link>
+                        <h3 className="mt-4 text-2xl">{open.name}</h3>
+                        <p className="mt-1 text-sm text-muted">{open.intro}</p>
+                        <div className="mt-8 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+                          {items.map((e) => (
+                            <ExperienceCard key={e.slug} experience={e} />
+                          ))}
+                        </div>
+                        {items.length === 0 && <p className="mt-8 text-muted">No races in this city yet.</p>}
                       </div>
+                    );
+                  }
+                  // Otherwise: one card per subsection
+                  return (
+                    <div className="mt-10 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+                      {g.subgroups.map((sg) => {
+                        const count = list.filter((e) => e.subgroup === sg.id).length;
+                        return (
+                          <Link key={sg.id} href={href({ type: g.id, sub: sg.id })} className="group block">
+                            <div className="relative aspect-[4/3] overflow-hidden">
+                              <Photo
+                                src={sg.image}
+                                alt={sg.name}
+                                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                                className="transition-transform duration-700 group-hover:scale-[1.03]"
+                              />
+                            </div>
+                            <div className="mt-5 flex items-baseline justify-between gap-4">
+                              <h3 className="text-2xl">{sg.name}</h3>
+                              <span className="shrink-0 text-xs text-muted">
+                                {count} {count === 1 ? "race" : "races"}
+                              </span>
+                            </div>
+                            <p className="mt-2 text-sm text-ink/80">{sg.intro}</p>
+                            <span className="mt-4 inline-block border-b border-ink pb-0.5 text-sm">View races</span>
+                          </Link>
+                        );
+                      })}
                     </div>
                   );
-                })
+                })()
               ) : (
                 <div className="mt-10 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
                   {list.map((e) => (
