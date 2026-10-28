@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import CityBadge from "@/components/CityBadge";
+import MemberCircle from "@/components/MemberCircle";
 import Photo from "@/components/Photo";
 import ReservationForm from "@/components/ReservationForm";
 import { experiences, formatEuro, getCategory, getExperience, isBookable, points, reservationPoints } from "@/lib/data";
@@ -21,6 +23,7 @@ export default function ExperiencePage({ params }: Props) {
   const category = getCategory(params.category);
   if (!experience || !category) notFound();
   const group = category.groups.find((g) => g.id === experience.group);
+  const isRestaurant = experience.category === "dining";
 
   return (
     <div className="container-page pt-8">
@@ -37,26 +40,45 @@ export default function ExperiencePage({ params }: Props) {
       </nav>
 
       <div className="mt-6 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
-        <div>
-          <div className="relative aspect-[16/10] overflow-hidden">
-            <Photo src={experience.image} alt={experience.title} priority sizes="(min-width: 1024px) 60vw, 100vw" />
+        {isRestaurant ? (
+          <div>
+            <div className="relative aspect-[3/2] overflow-hidden">
+              <CityBadge city={experience.city} />
+              <Photo src={experience.image} alt={experience.title} priority sizes="(min-width: 1024px) 60vw, 100vw" />
+            </div>
+            <h1 className="mt-8 text-4xl sm:text-5xl">{experience.title}</h1>
+            <p className="mt-2 text-xs uppercase tracking-[0.2em] text-muted">{experience.venue}</p>
+            <p className="lead mt-6 max-w-2xl">{experience.description}</p>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {experience.highlights.map((h) => (
+                <li key={h} className="border border-line px-3 py-1 text-xs">
+                  {h}
+                </li>
+              ))}
+            </ul>
           </div>
-          <p className="mt-8 text-xs uppercase tracking-wider text-muted">
-            {experience.venue} · {experience.city}
-          </p>
-          <h1 className="mt-2 text-3xl sm:text-4xl">{experience.title}</h1>
-          <p className="lead mt-5 max-w-2xl">{experience.description}</p>
+        ) : (
+          <div>
+            <div className="relative aspect-[16/10] overflow-hidden">
+              <Photo src={experience.image} alt={experience.title} priority sizes="(min-width: 1024px) 60vw, 100vw" />
+            </div>
+            <p className="mt-8 text-xs uppercase tracking-wider text-muted">
+              {experience.venue} · {experience.city}
+            </p>
+            <h1 className="mt-2 text-3xl sm:text-4xl">{experience.title}</h1>
+            <p className="lead mt-5 max-w-2xl">{experience.description}</p>
 
-          <h2 className="mt-10 text-xl">Highlights</h2>
-          <ul className="mt-4 space-y-2 text-sm">
-            {experience.highlights.map((h) => (
-              <li key={h} className="flex gap-3">
-                <span aria-hidden>—</span>
-                {h}
-              </li>
-            ))}
-          </ul>
-        </div>
+            <h2 className="mt-10 text-xl">Highlights</h2>
+            <ul className="mt-4 space-y-2 text-sm">
+              {experience.highlights.map((h) => (
+                <li key={h} className="flex gap-3">
+                  <span aria-hidden>—</span>
+                  {h}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <aside className="lg:sticky lg:top-20 lg:self-start">
           <div className="border border-line p-6 sm:p-8">
@@ -93,6 +115,8 @@ export default function ExperiencePage({ params }: Props) {
           </div>
         </aside>
       </div>
+
+      {isRestaurant && <MemberCircle experience={experience} />}
     </div>
   );
 }

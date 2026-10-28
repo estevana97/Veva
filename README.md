@@ -44,8 +44,12 @@ npm run dev        # http://localhost:3000
 | Navigation links | `components/Navbar.tsx` |
 | Pages | `app/**/page.tsx` |
 
-Images are Unsplash URLs. Replace them with your own photos by putting files in `public/` and using
-paths like `/images/golf.jpg`.
+Restaurant photos live in `public/images/restaurants/` (named after the restaurant's slug); the other
+images are Unsplash URLs. To replace a photo, add a file under `public/images/` and set `image` in
+`lib/data.ts` to a path like `/images/restaurants/troef.jpg`.
+
+Restaurant pages show a "Véva circle" block with member numbers. Fill them in per restaurant with
+`memberStats: { visits: 120, recommend: 96 }` in `lib/data.ts`; until then they show `[x]`.
 
 ## Pages
 

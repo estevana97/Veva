@@ -111,6 +111,8 @@ export type Experience = {
   highlights: string[];
   image: string;
   premium?: boolean; // earns the premium Véva Points bonus
+  // Member numbers for the venue page; leave out until there is real data (shows [x])
+  memberStats?: { visits: number; recommend: number };
   booking: Booking;
 };
 
@@ -128,7 +130,7 @@ export const experiences: Experience[] = [
     description:
       "Founded in 2018 by chef Lars Scharp and maître d' Floor Wiggers, Lars Amsterdam holds a Michelin star. The kitchen combines classic French technique with pronounced Asian influences, served on the second floor with views across the water.",
     highlights: ["Michelin star", "Lunch and dinner menus", "Views over the IJ"],
-    image: img("1414235077428-338989a2e8c0"),
+    image: "/images/restaurants/lars-amsterdam.jpg",
     premium: true,
     booking: { kind: "slot", times: ["12:00", "12:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
@@ -144,7 +146,7 @@ export const experiences: Experience[] = [
     description:
       "Set in a restored 1926 greenhouse in Frankendael Park, De Kas serves one set menu that changes daily with the harvest from its own gardens and local growers. Open for lunch and dinner, with vegetarian alternatives and wine pairings.",
     highlights: ["Daily changing set menu", "Vegetables from its own gardens", "Vegetarian options and wine pairing"],
-    image: img("1466978913421-dad2ebd01d17"),
+    image: "/images/restaurants/de-kas.jpg",
     premium: true,
     booking: { kind: "slot", times: ["12:00", "12:30", "18:00", "18:30", "19:00", "19:30"], maxGuests: 8, unit: "Guests" },
   },
@@ -160,7 +162,7 @@ export const experiences: Experience[] = [
     description:
       "In a bright former billiards hall on the Entrepotdok, the open kitchen works with seasonal vegetables, fish and game from Dutch suppliers. Choose a four- or five-course menu or order à la carte, with a wine list focused on natural wines.",
     highlights: ["Four- or five-course menu or à la carte", "Locally sourced produce", "Natural wine list"],
-    image: img("1559339352-11d035aa65de"),
+    image: "/images/restaurants/restaurant-entrepot.jpg",
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -190,7 +192,7 @@ export const experiences: Experience[] = [
     description:
       "Auberge brings the Parisian brasserie tradition to De Pijp, with French classics at accessible prices. It was awarded a Michelin Bib Gourmand in 2024 and 2025.",
     highlights: ["French brasserie classics", "Michelin Bib Gourmand", "In the heart of De Pijp"],
-    image: img("1550966871-3ed3cdb5ed0c"),
+    image: "/images/restaurants/auberge.jpg",
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -220,7 +222,7 @@ export const experiences: Experience[] = [
     description:
       "Roux builds on classical French foundations with creative and unexpected flavour combinations, all à la carte. The wine list counts more than 350 references, and the long counter overlooking the kitchen is a favourite seat.",
     highlights: ["À la carte, French-inspired", "350+ wines", "Counter seats at the kitchen"],
-    image: img("1504674900247-0877df9cc836"),
+    image: "/images/restaurants/roux.jpg",
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -235,7 +237,7 @@ export const experiences: Experience[] = [
     description:
       "On the Javaplein, Wilde Zwijnen serves menus of three to five courses built on local, seasonal ingredients, including game and sustainable fish, finished with a cheese board.",
     highlights: ["Three-, four- or five-course menus", "Seasonal and local", "Game and sustainable fish"],
-    image: img("1555396273-367ea4eb4db5"),
+    image: "/images/restaurants/wilde-zwijnen.jpg",
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -295,7 +297,7 @@ export const experiences: Experience[] = [
     description:
       "A lively spot for sharing plates, with more than 60 tapas and an extensive selection of Spanish wines. Ideal for a relaxed evening with friends.",
     highlights: ["60+ tapas to share", "Spanish wine list", "Relaxed, social atmosphere"],
-    image: img("1515669097368-22e68427d265"),
+    image: "/images/restaurants/peps.jpg",
     booking: { kind: "slot", times: ["17:00", "17:30", "18:00", "19:00", "20:00", "21:00"], maxGuests: 8, unit: "Guests" },
   },
 
@@ -764,6 +766,9 @@ export const tiers: Tier[] = [
       "radial-gradient(80% 60% at 60% 55%, #c9d6df 0%, #7f97a8 30%, #3f5868 60%, #a9bac5 85%, #5b7180 100%)",
   },
 ];
+
+// Short city codes shown as a badge on restaurant photos
+export const cityCodes: Record<string, string> = { Amsterdam: "AMS" };
 
 export const getCategory = (slug: string) => categories.find((c) => c.slug === slug);
 export const getExperiences = (slug: string) => experiences.filter((e) => e.category === slug);
