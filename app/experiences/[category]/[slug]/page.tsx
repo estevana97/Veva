@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import ChallengeStages from "@/components/ChallengeStages";
 import CityBadge from "@/components/CityBadge";
+import JoinChallengeForm from "@/components/JoinChallengeForm";
 import MemberCircle from "@/components/MemberCircle";
 import Photo from "@/components/Photo";
 import ReservationForm from "@/components/ReservationForm";
@@ -92,6 +94,22 @@ export default function ExperiencePage({ params }: Props) {
                   Still earn {points.perEuro} Véva Point per €1 you spend: upload your receipt in the Véva app after your visit.
                 </p>
               </>
+            ) : experience.booking.kind === "join" ? (
+              <>
+                <p className="font-serif text-2xl">
+                  Join the challenge <span className="block font-sans text-sm text-muted">{experience.priceNote}</span>
+                </p>
+                <p className="mt-3 border-l-2 border-ink pl-3 text-xs leading-relaxed">
+                  Earn <strong>{points.challengeStage} bonus Véva Points</strong> for every completed stage, and{" "}
+                  <strong>{points.challengeComplete.toLocaleString("en-GB")}</strong> when you complete the challenge.
+                </p>
+                <JoinChallengeForm category={experience.category} slug={experience.slug} />
+                {experience.website && (
+                  <a href={experience.website.href} target="_blank" rel="noopener noreferrer" className="mt-4 block text-center text-sm underline">
+                    {experience.website.label}
+                  </a>
+                )}
+              </>
             ) : (
               <>
                 {experience.priceFrom !== undefined ? (
@@ -116,6 +134,7 @@ export default function ExperiencePage({ params }: Props) {
         </aside>
       </div>
 
+      <ChallengeStages experience={experience} />
       {isRestaurant && <MemberCircle experience={experience} />}
     </div>
   );

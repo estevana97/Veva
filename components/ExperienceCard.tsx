@@ -23,7 +23,9 @@ export default function ExperienceCard({ experience: e }: { experience: Experien
             ? `from ${formatEuro(e.priceFrom)}`
             : e.booking.kind === "walk-in"
               ? "Walk-in only"
-              : "Free reservation"}
+              : e.booking.kind === "join"
+                ? "Free to join"
+                : "Free reservation"}
         </span>
       </div>
       <p className="mt-1 text-xs uppercase tracking-wider text-muted">

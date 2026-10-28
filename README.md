@@ -3,7 +3,7 @@
 A social reservation platform with a loyalty program for curated experiences in the Netherlands:
 
 - **Dining** (Amsterdam): fine dining, bistros & brasseries, wine bars & tapas
-- **Sports**: races (marathons, triathlons) and recreational (golf, padel, tennis)
+- **Sports**: challenges, races (marathons, triathlons), recreational (golf, padel, tennis) and Véva Exclusive Tournaments
 - **Culture**: museums & art, theatre/opera/concerts, festivals & galas
 - **Wellness**: spa & treatments, yoga & mindfulness, personal training
 
@@ -56,7 +56,8 @@ Restaurant pages show a "Véva circle" block with member numbers. Fill them in p
 - `/` home: hero, categories, how it works, rewards teaser
 - `/experiences`: "Our experiences" overview
 - `/experiences/[category]`: experiences grouped by type, with type and city filters
-- `/experiences/[category]/[slug]`: detail page with reservation form, Véva Points and QR code
+- `/experiences/[category]/[slug]`: detail page with reservation form, Véva Points and QR code (challenges: sign-up form and stages)
+- `/experiences/sports/[challenge]/[stage]`: challenge stage pages, e.g. each European Marathon Classics city
 - `/rewards`: how to earn and use Véva Points, Silver circle, Gold elite, Diamond vanguard
 - `/community`: app download, verified sharing, profiles, challenges and waitlist
 - `/about` (incl. benefits for partner venues), `/contact`, `/login`

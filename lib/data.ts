@@ -14,6 +14,8 @@ export const points = {
   perReservation: 50, // earned for every booking, regardless of spend
   premiumBonus: 50, // extra for premium bookings such as chef's tables
   perEuro: 1, // earned after the visit, once the venue scans the QR code
+  challengeStage: 250, // bonus for every completed challenge stage
+  challengeComplete: 1000, // bonus for completing a whole challenge
 };
 
 export const reservationPoints = (e: Experience) =>
@@ -49,13 +51,15 @@ export const categories: Category[] = [
   {
     slug: "sports",
     name: "Sports",
-    label: "Races & recreational",
+    label: "Challenges, races & play",
     intro:
-      "Secure your start at marathons and iron-distance triathlons, or book tee times, padel and tennis courts at the Netherlands' finest clubs.",
+      "Take on a Véva challenge, secure your start at marathons and triathlons, book tee times, padel and tennis courts, or compete in tournaments exclusive to Véva members.",
     image: "/images/categories/sports.jpg",
     groups: [
+      { id: "challenges", name: "Challenges", intro: "Long-term goals, broken down into stages, with bonus Véva Points along the way." },
       { id: "races", name: "Races", intro: "Marathons, triathlons and Ironman-distance races, with hospitality packages." },
-      { id: "recreational", name: "Recreational", intro: "Golf, padel and tennis: courts, tee times, lessons and tournaments." },
+      { id: "recreational", name: "Recreational", intro: "Golf, padel and tennis: courts, tee times and lessons." },
+      { id: "exclusive", name: "Véva Exclusive Tournaments", intro: "Tournaments organised by Véva, for members only." },
     ],
   },
   {
@@ -92,10 +96,27 @@ export type Booking =
   // Fixed-date event: guest picks a ticket type and quantity
   | { kind: "event"; date: string; tickets: { name: string; price: number }[]; maxGuests: number }
   // No reservations taken: shown as information only
-  | { kind: "walk-in"; hours: string };
+  | { kind: "walk-in"; hours: string }
+  // Free sign-up for a Véva challenge
+  | { kind: "join" };
 
-export type BookableExperience = Experience & { booking: Exclude<Booking, { kind: "walk-in" }> };
-export const isBookable = (e: Experience): e is BookableExperience => e.booking.kind !== "walk-in";
+export type BookableExperience = Experience & { booking: Extract<Booking, { kind: "slot" | "event" }> };
+export const isBookable = (e: Experience): e is BookableExperience =>
+  e.booking.kind === "slot" || e.booking.kind === "event";
+
+// A step in a challenge. Stages with a description get their own page.
+export type Stage = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  summary: string;
+  image: string;
+  description?: string;
+  highlights?: string[];
+  when?: string;
+  website?: { label: string; href: string };
+  related?: { category: CategorySlug; slug: string }; // an experience to book for this stage
+};
 
 export type Experience = {
   slug: string;
@@ -114,6 +135,11 @@ export type Experience = {
   // Member numbers for the venue page (shows [x] when left out). Current values are example figures.
   memberStats?: { visits: number; recommend: number };
   booking: Booking;
+  // Challenges only
+  website?: { label: string; href: string };
+  stages?: Stage[];
+  stagesTitle?: string;
+  stagesIntro?: string;
 };
 
 export const experiences: Experience[] = [
@@ -313,6 +339,170 @@ export const experiences: Experience[] = [
     booking: { kind: "slot", times: ["17:00", "17:30", "18:00", "19:00", "20:00", "21:00"], maxGuests: 8, unit: "Guests" },
   },
 
+  // Sports: challenges
+  {
+    slug: "road-to-european-marathon-classics-medal",
+    category: "sports",
+    group: "challenges",
+    title: "Road to the European Marathon Classics medal",
+    venue: "Eight European cities",
+    city: "Europe",
+    priceNote: "Free to join · race entries booked separately",
+    summary: "Run five of Europe's eight classic city marathons and earn the European Marathon Classics medal.",
+    description:
+      "The European Marathon Classics bring together eight of Europe's great city marathons. Finish five of them, each in a different city, and you earn the series medal, with space for a badge from every race you complete. There is no time limit. Véva helps you plan your route, keeps track of your progress and rewards every finish.",
+    highlights: ["Five of eight marathons, each in a different city", "No time limit", `${points.challengeStage} bonus Véva Points per marathon`],
+    image: img("1452626038306-9aae5e071dd3"),
+    booking: { kind: "join" },
+    website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
+    stagesTitle: "The eight marathons",
+    stagesIntro: "Choose any five. Each city has its own character, course and season.",
+    stages: [
+      {
+        slug: "rome",
+        title: "Rome",
+        subtitle: "Acea Run Rome The Marathon",
+        website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
+        when: "Usually held in March. Dates for the next edition are announced by the organisers.",
+        summary: "Start and finish by the Colosseum, through two thousand years of history.",
+        description:
+          "Rome's marathon runs past the city's greatest monuments, from the Colosseum and the Circus Maximus to St Peter's Square, on a course that loops through the historic centre. Spring weather and cobbled stretches make it a memorable first race of the season.",
+        highlights: ["Start and finish near the Colosseum", "Past St Peter's Square", "Usually the first race of the season"],
+        image: img("1552832230-c0197dd311b5"),
+      },
+      {
+        slug: "vienna",
+        title: "Vienna",
+        subtitle: "Vienna City Marathon",
+        website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
+        when: "Usually held in April. Dates for the next edition are announced by the organisers.",
+        summary: "A flat, fast tour of Vienna's grand boulevards, finishing at the Hofburg.",
+        description:
+          "From the Danube across the city to the Ringstrasse, the Vienna City Marathon shows off the palaces and boulevards of Europe's music capital. Vienna also hosted the launch of the European Marathon Classics in 2026.",
+        highlights: ["Finish by the Hofburg palace", "Along the Ringstrasse", "Fast, mostly flat course"],
+        image: img("1516550893923-42d28e5677af"),
+      },
+      {
+        slug: "london",
+        title: "London",
+        subtitle: "TCS London Marathon",
+        website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
+        when: "Usually held in April. Dates for the next edition are announced by the organisers.",
+        summary: "One of the World Marathon Majors, from Greenwich to The Mall.",
+        description:
+          "The London Marathon takes runners from Greenwich past the Cutty Sark, over Tower Bridge and along the Thames to a finish on The Mall in front of Buckingham Palace. The crowds are legendary, and starts are in high demand.",
+        highlights: ["Over Tower Bridge", "Finish on The Mall", "One of the six World Marathon Majors"],
+        image: img("1513635269975-59663e0ac1ad"),
+      },
+      {
+        slug: "madrid",
+        title: "Madrid",
+        subtitle: "Zurich Rock 'n' Roll Running Series Madrid",
+        website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
+        when: "Usually held in April. Dates for the next edition are announced by the organisers.",
+        summary: "A challenging, rolling course through the Spanish capital, with music along the way.",
+        description:
+          "Madrid's marathon is known for its hills and its party atmosphere, with live music along the route. The course passes landmarks such as the Paseo de la Castellana and the Puerta del Sol before finishing near Retiro Park.",
+        highlights: ["Live music along the route", "Rolling, challenging course", "Finish near Retiro Park"],
+        image: img("1539037116277-4db20889f2d4"),
+      },
+      {
+        slug: "copenhagen",
+        title: "Copenhagen",
+        subtitle: "Copenhagen Marathon",
+        website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
+        when: "Usually held in May. Dates for the next edition are announced by the organisers.",
+        summary: "A flat and friendly race along canals, harbours and colourful Nyhavn.",
+        description:
+          "Copenhagen's marathon is flat, green and known for its relaxed atmosphere. The route winds along the harbour, through the city's neighbourhoods and past the colourful houses of Nyhavn.",
+        highlights: ["Flat and fast", "Along the harbour and Nyhavn", "Relaxed Scandinavian atmosphere"],
+        image: img("1513622470522-26c3c8a854bc"),
+      },
+      {
+        slug: "warsaw",
+        title: "Warsaw",
+        subtitle: "Warsaw Marathon",
+        website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
+        when: "Usually held in September. Dates for the next edition are announced by the organisers.",
+        summary: "An autumn race through Poland's capital, from modern skyline to rebuilt Old Town.",
+        description:
+          "The Warsaw Marathon combines the city's modern skyline with its carefully rebuilt historic centre and the banks of the Vistula. Cool September weather makes it a good race for a fast time.",
+        highlights: ["Autumn race with cool weather", "Along the Vistula", "Modern skyline and historic centre"],
+        image: img("1519197924294-4ba991a11128"),
+      },
+      {
+        slug: "lisbon",
+        title: "Lisbon",
+        subtitle: "EDP Lisbon Marathon",
+        website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
+        when: "Usually held in October. Dates for the next edition are announced by the organisers.",
+        summary: "From the coast at Cascais along the Atlantic and the Tagus into Lisbon.",
+        description:
+          "Lisbon's marathon is a point-to-point race that starts on the coast in Cascais and follows the Atlantic and the Tagus estuary into the city, with views of the sea for much of the way.",
+        highlights: ["Point-to-point along the coast", "Sea views for much of the route", "Finish in the heart of Lisbon"],
+        image: img("1585208798174-6cedd86e019a"),
+      },
+      {
+        slug: "frankfurt",
+        title: "Frankfurt",
+        subtitle: "Mainova Frankfurt Marathon",
+        website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
+        when: "Usually held in October. Dates for the next edition are announced by the organisers.",
+        summary: "Germany's oldest city marathon, with a famous indoor finish in the Festhalle.",
+        description:
+          "Frankfurt's flat course runs between the skyscrapers of Germany's financial capital and along the river Main. It ends with one of the most memorable finishes in running: a red carpet inside the Festhalle.",
+        highlights: ["Indoor finish in the Festhalle", "Flat and fast", "Through the skyline of 'Mainhattan'"],
+        image: img("1564221710304-0b37c8b9d729"),
+      },
+    ],
+  },
+  {
+    slug: "road-to-your-first-ironman",
+    category: "sports",
+    group: "challenges",
+    title: "Road to your first Ironman",
+    venue: "Training & races in the Netherlands",
+    city: "Netherlands",
+    priceNote: "Free to join · training and race entries booked separately",
+    summary: "From your first training plan to the finish line of a full-distance triathlon.",
+    description:
+      "A full-distance triathlon means a 3.8 km swim, a 180 km bike ride and a 42.2 km run in a single day. This challenge breaks the journey into four stages, from building your base with a coach to your first half distance and, finally, the full distance. Most first-timers prepare for around a year.",
+    highlights: ["Four stages to the full distance", "Coaching and races to book through Véva", `${points.challengeStage} bonus Véva Points per stage`],
+    image: img("1530549387789-4c1017266635"),
+    booking: { kind: "join" },
+    stagesTitle: "Four stages",
+    stagesIntro: "Complete them in order, at your own pace.",
+    stages: [
+      { slug: "base", title: "Build your base", subtitle: "Stage 1", summary: "Start with a movement assessment and a personal training plan with a coach.", image: img("1571019613454-1cb2f99b2d8b"), related: { category: "wellness", slug: "personal-training-amsterdam" } },
+      { slug: "first-triathlon", title: "Your first triathlon", subtitle: "Stage 2", summary: "Finish a sprint or olympic-distance triathlon to get used to transitions and open water.", image: img("1517649763962-0c623066013b") },
+      { slug: "half-distance", title: "Half distance", subtitle: "Stage 3", summary: "1.9 km swim, 90 km bike and 21.1 km run: the big test before the full distance.", image: img("1541252260730-0412e8e2108e"), related: { category: "sports", slug: "iron-distance-triathlon-almere" } },
+      { slug: "full-distance", title: "The full distance", subtitle: "Stage 4", summary: "3.8 km swim, 180 km bike and 42.2 km run. Cross the line and call yourself an Ironman.", image: img("1530549387789-4c1017266635"), related: { category: "sports", slug: "iron-distance-triathlon-almere" } },
+    ],
+  },
+  {
+    slug: "road-to-handicap-below-20",
+    category: "sports",
+    group: "challenges",
+    title: "Road to a handicap below 20",
+    venue: "Golf courses in the Netherlands",
+    city: "Netherlands",
+    priceNote: "Free to join · lessons and tee times booked separately",
+    summary: "Lessons, practice and qualifying rounds to bring your handicap below 20.",
+    description:
+      "A handicap below 20 means you regularly play close to bogey golf. Under the World Handicap System, your handicap index is based on the best 8 of your 20 most recent qualifying scores, so steady improvement pays off. This challenge combines coaching with plenty of rounds on great courses.",
+    highlights: ["Four stages from lessons to qualifying rounds", "Lessons and tee times to book through Véva", `${points.challengeStage} bonus Véva Points per stage`],
+    image: img("1535131749006-b7f58c99034b"),
+    booking: { kind: "join" },
+    stagesTitle: "Four stages",
+    stagesIntro: "Track your progress round by round.",
+    stages: [
+      { slug: "lessons", title: "Lessons with a pro", subtitle: "Stage 1", summary: "Work on your swing, short game and course management with a PGA professional.", image: img("1587174486073-ae5e5cff23aa"), related: { category: "sports", slug: "golf-clinic-noordwijk" } },
+      { slug: "practice", title: "Practice with purpose", subtitle: "Stage 2", summary: "Regular sessions on the range and putting green, focused on what your coach asked you to improve.", image: img("1592919505780-303950717480") },
+      { slug: "qualifying-rounds", title: "Play qualifying rounds", subtitle: "Stage 3", summary: "Play and register at least 20 qualifying rounds so your handicap index reflects your game.", image: img("1535131749006-b7f58c99034b"), related: { category: "sports", slug: "golf-tee-time-hilversum" } },
+      { slug: "below-20", title: "Break 20", subtitle: "Stage 4", summary: "Reach a handicap index below 20 and celebrate with a round at a course of your choice.", image: img("1587174486073-ae5e5cff23aa") },
+    ],
+  },
+
   // Sports: races
   {
     slug: "amsterdam-city-marathon",
@@ -442,7 +632,7 @@ export const experiences: Experience[] = [
   {
     slug: "padel-tournament-utrecht",
     category: "sports",
-    group: "recreational",
+    group: "exclusive",
     title: "Véva padel tournament",
     venue: "Padel Park Utrecht",
     city: "Utrecht",
@@ -461,6 +651,30 @@ export const experiences: Experience[] = [
         { name: "Dinner only (guest)", price: 45 },
       ],
       maxGuests: 2,
+    },
+  },
+  {
+    slug: "veva-golf-invitational",
+    category: "sports",
+    group: "exclusive",
+    title: "Véva Golf Invitational",
+    venue: "Duinen Golf",
+    city: "Noordwijk",
+    priceFrom: 145,
+    priceNote: "per player",
+    summary: "A members-only Stableford competition on a seaside links, with dinner and prizes.",
+    description:
+      "Véva's own golf day for members: a shotgun start, a Stableford competition in flights matched by handicap, and a dinner with prize-giving in the clubhouse overlooking the dunes.",
+    highlights: ["Stableford, flights by handicap", "Dinner and prize-giving included", "Bonus Véva Points for the winners"],
+    image: img("1587174486073-ae5e5cff23aa"),
+    booking: {
+      kind: "event",
+      date: "2027-06-12",
+      tickets: [
+        { name: "Player", price: 145 },
+        { name: "Dinner only (guest)", price: 65 },
+      ],
+      maxGuests: 4,
     },
   },
   {
