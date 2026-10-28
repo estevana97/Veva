@@ -27,15 +27,15 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/10" />
 
         <div className="container-page relative py-24">
-          <h1 className="max-w-2xl text-4xl leading-tight sm:text-5xl">One platform for all your curated experiences</h1>
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/90 sm:text-[15px]">
+          <h1 className="max-w-xl text-3xl leading-tight sm:text-4xl">One platform for all your curated experiences</h1>
+          <p className="mt-4 max-w-lg text-[13px] leading-relaxed text-white/90 sm:text-sm">
             Véva brings together the experiences that shape who you are, from chef’s tables and cultural activities to
             sports races and wellness. Book them in one place, share them with the people who move you forward, and get
             rewarded for every experience.
           </p>
           <Link
             href="/experiences"
-            className="mt-10 inline-flex items-center justify-center border border-white px-8 py-2 font-serif text-lg text-white transition-colors hover:bg-white hover:text-ink"
+            className="mt-8 inline-flex items-center justify-center border border-white px-7 py-2 font-serif text-base text-white transition-colors hover:bg-white hover:text-ink"
           >
             Explore now
           </Link>
