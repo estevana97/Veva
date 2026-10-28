@@ -8,8 +8,8 @@ const nextConfig = {
     return [
       { source: "/experiences/restaurants/:path*", destination: "/experiences/dining", permanent: true },
       { source: "/experiences/restaurants", destination: "/experiences/dining", permanent: true },
-      { source: "/experiences/events/:path*", destination: "/experiences/sports?type=marathon", permanent: true },
-      { source: "/experiences/events", destination: "/experiences/sports?type=marathon", permanent: true },
+      { source: "/experiences/events/:path*", destination: "/experiences/sports?type=races", permanent: true },
+      { source: "/experiences/events", destination: "/experiences/sports?type=races", permanent: true },
       // Race pages replaced by official events
       { source: "/experiences/sports/amsterdam-city-marathon", destination: "/experiences/sports/tcs-amsterdam-marathon", permanent: true },
       { source: "/experiences/sports/rotterdam-spring-marathon", destination: "/experiences/sports/nn-marathon-rotterdam", permanent: true },

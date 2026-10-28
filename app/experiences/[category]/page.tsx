@@ -73,11 +73,29 @@ export default function CategoryPage({ params, searchParams }: Props) {
                 <h2 className="text-3xl">{g.name}</h2>
                 <p className="mt-1 text-sm text-muted">{g.intro}</p>
               </div>
-              <div className="mt-10 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-                {list.map((e) => (
-                  <ExperienceCard key={e.slug} experience={e} />
-                ))}
-              </div>
+              {g.subgroups ? (
+                g.subgroups.map((sg) => {
+                  const items = list.filter((e) => e.subgroup === sg.id);
+                  if (items.length === 0) return null;
+                  return (
+                    <div key={sg.id} id={sg.id} className="mt-12 scroll-mt-20">
+                      <h3 className="text-2xl">{sg.name}</h3>
+                      <p className="mt-1 text-sm text-muted">{sg.intro}</p>
+                      <div className="mt-8 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+                        {items.map((e) => (
+                          <ExperienceCard key={e.slug} experience={e} />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="mt-10 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+                  {list.map((e) => (
+                    <ExperienceCard key={e.slug} experience={e} />
+                  ))}
+                </div>
+              )}
             </section>
           );
         })}

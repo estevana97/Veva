@@ -23,7 +23,7 @@ export const reservationPoints = (e: Experience) =>
 
 export type CategorySlug = "dining" | "sports" | "culture" | "wellness";
 
-export type Group = { id: string; name: string; intro: string };
+export type Group = { id: string; name: string; intro: string; subgroups?: { id: string; name: string; intro: string }[] };
 
 export type Category = {
   slug: CategorySlug;
@@ -57,9 +57,16 @@ export const categories: Category[] = [
     image: "/images/categories/sports.jpg",
     groups: [
       { id: "challenges", name: "Challenges", intro: "Long-term goals, broken down into stages, with bonus Véva Points along the way." },
-      { id: "marathon", name: "Marathon", intro: "The great city marathons of the Netherlands." },
-      { id: "triathlon", name: "Triathlon", intro: "IRONMAN and iron-distance triathlons in the Netherlands." },
-      { id: "cycling", name: "Cycling", intro: "Ride the classics on the hills of Limburg." },
+      {
+        id: "races",
+        name: "Races",
+        intro: "Official marathons, triathlons and cycling classics in the Netherlands.",
+        subgroups: [
+          { id: "marathon", name: "Marathon", intro: "The great city marathons of the Netherlands." },
+          { id: "triathlon", name: "Triathlon", intro: "IRONMAN and iron-distance triathlons in the Netherlands." },
+          { id: "cycling", name: "Cycling", intro: "Ride the classics on the hills of Limburg." },
+        ],
+      },
       { id: "recreational", name: "Recreational", intro: "Golf, padel and tennis: courts, tee times and lessons." },
       { id: "exclusive", name: "Véva Exclusive Tournaments", intro: "Tournaments organised by Véva, for members only." },
     ],
@@ -126,6 +133,7 @@ export type Experience = {
   slug: string;
   category: CategorySlug;
   group: string;
+  subgroup?: string; // for groups with subsections, e.g. Races > Marathon
   title: string;
   venue: string;
   city: string;
@@ -511,7 +519,8 @@ export const experiences: Experience[] = [
   {
     slug: "tcs-amsterdam-marathon",
     category: "sports",
-    group: "marathon",
+    group: "races",
+    subgroup: "marathon",
     title: "TCS Amsterdam Marathon",
     venue: "Olympic Stadium",
     city: "Amsterdam",
@@ -530,7 +539,8 @@ export const experiences: Experience[] = [
   {
     slug: "nn-marathon-rotterdam",
     category: "sports",
-    group: "marathon",
+    group: "races",
+    subgroup: "marathon",
     title: "NN Marathon Rotterdam",
     venue: "Coolsingel",
     city: "Rotterdam",
@@ -549,7 +559,8 @@ export const experiences: Experience[] = [
   {
     slug: "ironman-70-3-westfriesland",
     category: "sports",
-    group: "triathlon",
+    group: "races",
+    subgroup: "triathlon",
     title: "IRONMAN 70.3 Westfriesland",
     venue: "Historic harbour",
     city: "Hoorn",
@@ -568,7 +579,8 @@ export const experiences: Experience[] = [
   {
     slug: "challenge-almere-amsterdam",
     category: "sports",
-    group: "triathlon",
+    group: "races",
+    subgroup: "triathlon",
     title: "Challenge Almere-Amsterdam",
     venue: "Weerwater",
     city: "Almere",
@@ -587,7 +599,8 @@ export const experiences: Experience[] = [
   {
     slug: "amstel-gold-race",
     category: "sports",
-    group: "cycling",
+    group: "races",
+    subgroup: "cycling",
     title: "Amstel Gold Race",
     venue: "South Limburg",
     city: "Valkenburg",

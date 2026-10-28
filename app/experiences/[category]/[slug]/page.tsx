@@ -25,6 +25,7 @@ export default function ExperiencePage({ params }: Props) {
   const category = getCategory(params.category);
   if (!experience || !category) notFound();
   const group = category.groups.find((g) => g.id === experience.group);
+  const subgroup = group?.subgroups?.find((sg) => sg.id === experience.subgroup);
   const isRestaurant = experience.category === "dining";
 
   return (
@@ -37,6 +38,7 @@ export default function ExperiencePage({ params }: Props) {
           <>
             {" / "}
             <Link href={`/experiences/${category.slug}?type=${group.id}`} className="hover:underline">{group.name}</Link>
+            {subgroup && <>{" / "}{subgroup.name}</>}
           </>
         )}
       </nav>

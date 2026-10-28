@@ -3,7 +3,7 @@
 A social reservation platform with a loyalty program for curated experiences in the Netherlands:
 
 - **Dining** (Amsterdam): fine dining, bistros & brasseries, wine bars & tapas
-- **Sports**: challenges, marathon, triathlon, cycling, recreational (golf, padel, tennis) and Véva Exclusive Tournaments
+- **Sports**: challenges, races (marathon, triathlon, cycling), recreational (golf, padel, tennis) and Véva Exclusive Tournaments
 - **Culture**: museums & art, theatre/opera/concerts, festivals & galas
 - **Wellness**: spa & treatments, yoga & mindfulness, personal training
 
