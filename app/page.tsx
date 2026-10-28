@@ -17,8 +17,8 @@ export default function HomePage() {
             Explore now
           </Link>
         </div>
-        <div className="relative order-1 aspect-[4/5] w-full lg:order-2 lg:aspect-auto lg:h-[calc(100vh-6rem)]">
-          <Photo src={images.homeHero} alt="Friends raising glasses of champagne and red wine outdoors" className="object-[50%_75%]" priority sizes="(min-width: 1024px) 50vw, 100vw" />
+        <div className="relative order-1 mx-auto aspect-[4/5] w-[85%] lg:order-2 lg:mr-0 lg:aspect-auto lg:h-[calc((100vh-6rem)*0.8)] lg:w-[80%]">
+          <Photo src={images.homeHero} alt="Friends raising glasses of champagne and red wine outdoors" className="object-[50%_75%]" priority sizes="(min-width: 1024px) 40vw, 85vw" />
         </div>
       </section>
 
