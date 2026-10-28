@@ -111,7 +111,7 @@ export type Experience = {
   highlights: string[];
   image: string;
   premium?: boolean; // earns the premium Véva Points bonus
-  // Member numbers for the venue page; leave out until there is real data (shows [x])
+  // Member numbers for the venue page (shows [x] when left out). Current values are example figures.
   memberStats?: { visits: number; recommend: number };
   booking: Booking;
 };
@@ -132,6 +132,7 @@ export const experiences: Experience[] = [
     highlights: ["Michelin star", "Lunch and dinner menus", "Views over the IJ"],
     image: "/images/restaurants/lars-amsterdam.jpg",
     premium: true,
+    memberStats: { visits: 184, recommend: 97 }, // example figures
     booking: { kind: "slot", times: ["12:00", "12:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -148,6 +149,7 @@ export const experiences: Experience[] = [
     highlights: ["Daily changing set menu", "Vegetables from its own gardens", "Vegetarian options and wine pairing"],
     image: "/images/restaurants/de-kas.jpg",
     premium: true,
+    memberStats: { visits: 312, recommend: 96 }, // example figures
     booking: { kind: "slot", times: ["12:00", "12:30", "18:00", "18:30", "19:00", "19:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -163,6 +165,7 @@ export const experiences: Experience[] = [
       "In a bright former billiards hall on the Entrepotdok, the open kitchen works with seasonal vegetables, fish and game from Dutch suppliers. Choose a four- or five-course menu or order à la carte, with a wine list focused on natural wines.",
     highlights: ["Four- or five-course menu or à la carte", "Locally sourced produce", "Natural wine list"],
     image: "/images/restaurants/restaurant-entrepot.jpg",
+    memberStats: { visits: 97, recommend: 92 }, // example figures
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -178,6 +181,7 @@ export const experiences: Experience[] = [
       "Troef serves an à la carte menu of French classics with Mediterranean touches, led by chef Raymond Plat. Its wine room holds more than 3,000 bottles.",
     highlights: ["À la carte French cooking", "Wine room with 3,000+ bottles", "Smart casual"],
     image: img("1424847651672-bf20a4b0982b"),
+    memberStats: { visits: 143, recommend: 94 }, // example figures
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -193,6 +197,7 @@ export const experiences: Experience[] = [
       "Auberge brings the Parisian brasserie tradition to De Pijp, with French classics at accessible prices. It was awarded a Michelin Bib Gourmand in 2024 and 2025.",
     highlights: ["French brasserie classics", "Michelin Bib Gourmand", "In the heart of De Pijp"],
     image: "/images/restaurants/auberge.jpg",
+    memberStats: { visits: 226, recommend: 95 }, // example figures
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -208,6 +213,7 @@ export const experiences: Experience[] = [
       "Named after the Dutch word for Lille, Rijsel serves classic French cooking with Flemish roots. The rotisserie is the centrepiece, with poultry turning on the spit, and the short menu changes regularly.",
     highlights: ["Famous rotisserie chicken", "Open kitchen", "Short, changing menu"],
     image: img("1600891964599-f61ba0e24092"),
+    memberStats: { visits: 268, recommend: 93 }, // example figures
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -223,6 +229,7 @@ export const experiences: Experience[] = [
       "Roux builds on classical French foundations with creative and unexpected flavour combinations, all à la carte. The wine list counts more than 350 references, and the long counter overlooking the kitchen is a favourite seat.",
     highlights: ["À la carte, French-inspired", "350+ wines", "Counter seats at the kitchen"],
     image: "/images/restaurants/roux.jpg",
+    memberStats: { visits: 121, recommend: 96 }, // example figures
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -237,7 +244,8 @@ export const experiences: Experience[] = [
     description:
       "On the Javaplein, Wilde Zwijnen serves menus of three to five courses built on local, seasonal ingredients, including game and sustainable fish, finished with a cheese board.",
     highlights: ["Three-, four- or five-course menus", "Seasonal and local", "Game and sustainable fish"],
-    image: "/images/restaurants/wilde-zwijnen.jpg",
+    image: img("1555396273-367ea4eb4db5"),
+    memberStats: { visits: 164, recommend: 94 }, // example figures
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -253,6 +261,7 @@ export const experiences: Experience[] = [
       "On the Eerste Helmersstraat, De Zingende Zwaan pairs the feel of a traditional brown café with a London twist. The seasonal menu brings French and British bistro classics such as oysters with Chablis, fish and chips and burgers, at prices that are friendly for Amsterdam.",
     highlights: ["French and British bistro classics", "Oysters and Chablis", "Walk-in only, open from the afternoon"],
     image: img("1572116469696-31de0f17cc34"),
+    memberStats: { visits: 88, recommend: 91 }, // example figures
     booking: { kind: "walk-in", hours: "Open daily from 15:30. No reservations: just walk in." },
   },
   {
@@ -268,6 +277,7 @@ export const experiences: Experience[] = [
       "A wood-panelled blend of a traditional Dutch café and a modern wine bar, known for its sunny canal-side terrace. Natural wines, craft beers and small dishes.",
     highlights: ["Sunny terrace by the canal", "Natural wines and craft beer", "Small dishes and snacks"],
     image: img("1514933651103-005eec06c04b"),
+    memberStats: { visits: 203, recommend: 90 }, // example figures
     booking: { kind: "slot", times: ["15:00", "16:00", "17:00", "18:00", "19:00", "20:00"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -282,7 +292,8 @@ export const experiences: Experience[] = [
     description:
       "A small, cosy bistro with a large wine list focused on France and Burgundy. The kitchen serves a three- or four-course menu that changes daily, and the cheese selection is a favourite.",
     highlights: ["Daily three- or four-course menu", "Extensive French wine list", "Renowned cheese selection"],
-    image: img("1510812431401-41d2bd2722f3"),
+    image: "/images/restaurants/cafe-de-klepel.jpg",
+    memberStats: { visits: 76, recommend: 95 }, // example figures
     booking: { kind: "slot", times: ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"], maxGuests: 8, unit: "Guests" },
   },
   {
@@ -298,6 +309,7 @@ export const experiences: Experience[] = [
       "A lively spot for sharing plates, with more than 60 tapas and an extensive selection of Spanish wines. Ideal for a relaxed evening with friends.",
     highlights: ["60+ tapas to share", "Spanish wine list", "Relaxed, social atmosphere"],
     image: "/images/restaurants/peps.jpg",
+    memberStats: { visits: 245, recommend: 89 }, // example figures
     booking: { kind: "slot", times: ["17:00", "17:30", "18:00", "19:00", "20:00", "21:00"], maxGuests: 8, unit: "Guests" },
   },
 

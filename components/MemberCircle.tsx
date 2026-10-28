@@ -1,13 +1,12 @@
 import type { Experience } from "@/lib/data";
 
-// Boutique-style block with member numbers. Values show as [x] until real data is added in lib/data.ts.
+// Boutique-style block with member numbers from lib/data.ts (shows [x] when a venue has none).
 export default function MemberCircle({ experience }: { experience: Experience }) {
   const stats = experience.memberStats;
 
   return (
     <section className="mt-24 bg-[#f5f0e8] px-6 py-16 text-center sm:px-12 sm:py-20">
       <p className="text-[11px] uppercase tracking-[0.3em] text-muted">The Véva circle</p>
-      <h2 className="mt-3 font-serif text-3xl italic sm:text-4xl">In good company</h2>
       <div className="mx-auto mt-4 h-px w-12 bg-[#b89b6a]" />
 
       <div className="mx-auto mt-12 grid max-w-3xl gap-10 sm:grid-cols-2 sm:gap-0 sm:divide-x sm:divide-[#d9cdb8]">
