@@ -63,9 +63,9 @@ export const categories: Category[] = [
         name: "Races",
         intro: "Official marathons, triathlons and cycling classics in the Netherlands.",
         subgroups: [
-          { id: "marathon", name: "Marathon", intro: "The great city marathons of the Netherlands.", image: img("1452626038306-9aae5e071dd3") },
+          { id: "marathon", name: "Marathon", intro: "The great city marathons of the Netherlands.", image: "/images/races/nn-marathon-rotterdam.jpg" },
           { id: "triathlon", name: "Triathlon", intro: "IRONMAN and iron-distance triathlons in the Netherlands.", image: "/images/challenges/road-to-your-first-ironman.jpg" },
-          { id: "cycling", name: "Cycling", intro: "Ride the classics on the hills of Limburg.", image: img("1541625602330-2277a4c46182") },
+          { id: "cycling", name: "Cycling", intro: "Ride the classics on the hills of Limburg.", image: "/images/races/amstel-gold-race.jpg" },
         ],
       },
       { id: "recreational", name: "Recreational", intro: "Golf, padel and tennis: courts, tee times and lessons." },
@@ -530,7 +530,7 @@ export const experiences: Experience[] = [
     description:
       "One of Europe's fastest marathons, with a World Athletics Platinum Label. The largely flat course starts and finishes in the 1928 Olympic Stadium and takes runners along the Amstel, past the Rijksmuseum and through the Vondelpark. Places sell out quickly, so register as soon as entries open.",
     highlights: ["Start and finish in the Olympic Stadium", "Flat and fast, Platinum Label", "Half marathon on the same day"],
-    image: img("1534351590666-13e3e96b5017"),
+    image: "/images/races/tcs-amsterdam-marathon.jpg",
     booking: {
       kind: "external",
       when: "Usually held on a Sunday in mid-October (the 2026 edition was on 18 October).",
@@ -550,7 +550,7 @@ export const experiences: Experience[] = [
     description:
       "Known as the fastest marathon in the Netherlands, Rotterdam's spring classic starts and finishes on the Coolsingel and crosses the Erasmus Bridge, cheered on by huge crowds. The flat course is a favourite for personal bests.",
     highlights: ["Over the Erasmus Bridge", "Flat course, ideal for a personal best", "Huge crowds along the route"],
-    image: img("1543872084-c7bd3822856f"),
+    image: "/images/races/nn-marathon-rotterdam.jpg",
     booking: {
       kind: "external",
       when: "Usually held in April. The 2027 edition is listed for the weekend of 10–11 April; check the official website.",
@@ -610,7 +610,7 @@ export const experiences: Experience[] = [
     description:
       "The Amstel Gold Race is the Netherlands' biggest one-day cycling classic. The day before the professional race, around 15,000 amateur riders take on the Amstel Gold Race Tourtocht over the same famous climbs, starting and finishing in Valkenburg. Places are allocated by lottery.",
     highlights: ["Routes from 60 to 240 km", "The famous climbs of South Limburg", "Start and finish in Valkenburg"],
-    image: img("1517649763962-0c623066013b"),
+    image: "/images/races/amstel-gold-race.jpg",
     booking: {
       kind: "external",
       when: "Usually held in April, on the Saturday before the professional race. Places are allocated by lottery.",
