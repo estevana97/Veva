@@ -47,11 +47,11 @@ export default function RewardsPage() {
         </p>
       </section>
 
-      <section className="container-page grid gap-16 pt-10 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 xl:gap-14">
+      <section className="container-page grid gap-16 pt-10 sm:grid-cols-2 sm:gap-10 xl:grid-cols-4 xl:gap-14">
         {tiers.map((t) => (
           <div key={t.id} className="flex flex-col items-center text-center">
             <div className="aspect-[7/6] w-full rounded-2xl shadow-sm" style={{ background: t.surface }} role="img" aria-label={`${t.name} card`} />
-            <h2 className="mt-10 text-3xl">{t.name}</h2>
+            <h2 className="mt-10 whitespace-nowrap text-[clamp(1.375rem,1.9vw,1.75rem)]">{t.name}</h2>
             <p className="mt-2 text-xs uppercase tracking-wider text-muted">{t.points}</p>
             <p className="mt-4 max-w-sm flex-1 text-sm leading-relaxed text-ink/80">{t.summary}</p>
             <a href={`#${t.id}`} className="btn-outline mt-8 w-full">
