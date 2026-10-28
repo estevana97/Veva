@@ -25,7 +25,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-[0_6px_10px_-4px_rgba(0,0,0,0.18)]">
       <nav className="container-page flex h-12 items-center justify-between">
-        <Link href="/" className="font-serif text-xl">
+        <Link href="/" className="font-serif text-[26px] leading-none">
           Véva
         </Link>
 

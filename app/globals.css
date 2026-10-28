@@ -36,6 +36,6 @@
     @apply mb-1.5 block text-xs uppercase tracking-wider text-muted;
   }
   .lead {
-    @apply text-sm leading-relaxed text-ink/80 sm:text-[15px];
+    @apply text-sm leading-relaxed text-ink/80 sm:text-[14px];
   }
 }
