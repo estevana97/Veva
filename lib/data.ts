@@ -934,9 +934,10 @@ export const experiences: Experience[] = [
 ];
 
 export type Tier = {
-  id: "silver" | "gold" | "diamond";
+  id: "bronze" | "silver" | "gold" | "diamond";
   name: string;
   points: string;
+  // Who the members in this level are
   summary: string;
   perks: string[];
   // CSS background that evokes the tier's material
@@ -945,11 +946,11 @@ export type Tier = {
 
 export const tiers: Tier[] = [
   {
-    id: "silver",
-    name: "Silver circle",
-    points: "0 – 999 Véva Points",
+    id: "bronze",
+    name: "Bronze explorer",
+    points: "0 – 1,999 Véva Points",
     summary:
-      "The entry point to Véva's exclusive world, offering a taste of premium perks for those beginning their journey with curated experiences.",
+      "For those who are starting to discover the experiences that make life richer: a first chef's table, a first race, a first afternoon at the spa.",
     perks: [
       "50 Véva Points for every reservation",
       "1 Véva Point for every €1 spent at the venue",
@@ -957,19 +958,33 @@ export const tiers: Tier[] = [
       "Share verified experiences with the community",
     ],
     surface:
+      "linear-gradient(135deg, #5a2e15 0%, #a8612f 28%, #e3a872 50%, #b8713c 72%, #6e3b1f 100%)",
+  },
+  {
+    id: "silver",
+    name: "Silver circle",
+    points: "2,000 – 4,999 Véva Points",
+    summary:
+      "For members who have found their favourite places and come back regularly, while discovering new restaurants, courts and stages along the way.",
+    perks: [
+      "Everything in Bronze explorer",
+      "10% bonus Véva Points on every booking",
+      "Gift or transfer points to friends and family",
+      "Early announcements of new experiences and events",
+    ],
+    surface:
       "radial-gradient(120% 90% at 20% 10%, #f7f7f7 0%, #bdbdbd 35%, #6b6b6b 60%, #e9e9e9 78%, #2b2b2b 100%)",
   },
   {
     id: "gold",
     name: "Gold elite",
-    points: "1,000 – 4,999 Véva Points",
+    points: "5,000 – 14,999 Véva Points",
     summary:
-      "A step into refined exclusivity, rewarding frequent users with enhanced access and personalised touches for unforgettable moments.",
+      "For the frequent experiencers who plan their weeks around great food, sport, culture and wellbeing, and always bring the people they value along.",
     perks: [
       "Everything in Silver circle",
       "25% bonus Véva Points on every booking",
       "Early access to high-demand tables, tee times and race starts",
-      "Gift or transfer points to friends and family",
       "Personalised recommendations",
     ],
     surface:
@@ -978,9 +993,9 @@ export const tiers: Tier[] = [
   {
     id: "diamond",
     name: "Diamond vanguard",
-    points: "5,000+ Véva Points",
+    points: "15,000+ Véva Points",
     summary:
-      "The pinnacle of Véva exclusivity, reserved for the most discerning members who demand the finest in curated leisure.",
+      "For the most dedicated members, who live for curated experiences, take on the biggest challenges and set the tone for the Véva community.",
     perks: [
       "Everything in Gold elite",
       "50% bonus Véva Points on every booking",

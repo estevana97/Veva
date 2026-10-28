@@ -58,7 +58,7 @@ Restaurant pages show a "Véva circle" block with member numbers. Fill them in p
 - `/experiences/[category]`: experiences grouped by type, with type and city filters
 - `/experiences/[category]/[slug]`: detail page with reservation form, Véva Points and QR code (challenges: sign-up form and stages)
 - `/experiences/sports/[challenge]/[stage]`: challenge stage pages, e.g. each European Marathon Classics city
-- `/rewards`: how to earn and use Véva Points, Silver circle, Gold elite, Diamond vanguard
+- `/rewards`: how to earn and use Véva Points, Bronze explorer, Silver circle, Gold elite, Diamond vanguard
 - `/community`: app download, verified sharing, profiles, challenges and waitlist
 - `/about` (incl. benefits for partner venues), `/contact`, `/login`
 

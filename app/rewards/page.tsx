@@ -47,12 +47,13 @@ export default function RewardsPage() {
         </p>
       </section>
 
-      <section className="container-page grid gap-16 pt-10 md:grid-cols-3 md:gap-10 lg:gap-32">
+      <section className="container-page grid gap-16 pt-10 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 xl:gap-14">
         {tiers.map((t) => (
           <div key={t.id} className="flex flex-col items-center text-center">
             <div className="aspect-[7/6] w-full rounded-2xl shadow-sm" style={{ background: t.surface }} role="img" aria-label={`${t.name} card`} />
-            <h2 className="mt-12 text-3xl">{t.name}</h2>
-            <p className="mt-5 max-w-sm flex-1 text-xs leading-relaxed">{t.summary}</p>
+            <h2 className="mt-10 text-3xl">{t.name}</h2>
+            <p className="mt-2 text-xs uppercase tracking-wider text-muted">{t.points}</p>
+            <p className="mt-4 max-w-sm flex-1 text-sm leading-relaxed text-ink/80">{t.summary}</p>
             <a href={`#${t.id}`} className="btn-outline mt-8 w-full">
               More info
             </a>
@@ -120,14 +121,17 @@ export default function RewardsPage() {
               <h3 className="mt-4 text-2xl">{t.name}</h3>
               <p className="text-xs uppercase tracking-wider text-muted">{t.points}</p>
             </div>
-            <ul className="grid gap-3 text-sm sm:grid-cols-2">
-              {t.perks.map((p) => (
-                <li key={p} className="flex gap-3">
-                  <span aria-hidden>—</span>
-                  {p}
-                </li>
-              ))}
-            </ul>
+            <div className="self-start">
+              <p className="lead max-w-2xl italic">{t.summary}</p>
+              <ul className="mt-6 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
+                {t.perks.map((p) => (
+                  <li key={p} className="flex gap-3">
+                    <span aria-hidden>—</span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         ))}
       </section>

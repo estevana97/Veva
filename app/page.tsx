@@ -63,7 +63,7 @@ export default function HomePage() {
       <section className="container-page mt-28 text-center">
         <h2 className="text-3xl">Véva rewards</h2>
         <p className="lead mx-auto mt-4 max-w-xl">
-          Earn Véva Points when you book and again when you spend. Use them across every partner, or rise from Silver
+          Earn Véva Points when you book and again when you spend. Use them across every partner, or rise from Bronze
           to Diamond for early access, exclusive reservations and a personal concierge.
         </p>
         <div className="mx-auto mt-10 flex max-w-md justify-center gap-4">
