@@ -18,7 +18,7 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="relative order-1 aspect-[4/5] w-full lg:order-2 lg:aspect-auto lg:h-[calc(100vh-6rem)]">
-          <Photo src={images.homeHero} alt="Aerial view of a golf course in the Dutch countryside" priority sizes="(min-width: 1024px) 50vw, 100vw" />
+          <Photo src={images.homeHero} alt="Friends raising glasses of champagne and red wine outdoors" className="object-[50%_75%]" priority sizes="(min-width: 1024px) 50vw, 100vw" />
         </div>
       </section>
 
