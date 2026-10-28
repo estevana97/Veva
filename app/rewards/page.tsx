@@ -123,9 +123,9 @@ export default function RewardsPage() {
             </div>
             <div className="self-start">
               <p className="lead max-w-2xl italic">{t.summary}</p>
-              <ul className="mt-6 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
+              <ul className="mt-6 gap-x-8 text-sm sm:columns-2">
                 {t.perks.map((p) => (
-                  <li key={p} className="flex gap-3">
+                  <li key={p} className="mb-3 flex break-inside-avoid gap-3">
                     <span aria-hidden>—</span>
                     {p}
                   </li>
