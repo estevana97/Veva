@@ -352,7 +352,7 @@ export const experiences: Experience[] = [
     description:
       "The European Marathon Classics bring together eight of Europe's great city marathons. Finish five of them, each in a different city, and you earn the series medal, with space for a badge from every race you complete. There is no time limit. Véva helps you plan your route, keeps track of your progress and rewards every finish.",
     highlights: ["Five of eight marathons, each in a different city", "No time limit", `${points.challengeStage} bonus Véva Points per marathon`],
-    image: img("1452626038306-9aae5e071dd3"),
+    image: "/images/challenges/road-to-european-marathon-classics-medal.jpg",
     booking: { kind: "join" },
     website: { label: "European Marathon Classics website", href: "https://europeanmarathonclassics.eu/" },
     stagesTitle: "The eight marathons",
@@ -468,7 +468,7 @@ export const experiences: Experience[] = [
     description:
       "A full-distance triathlon means a 3.8 km swim, a 180 km bike ride and a 42.2 km run in a single day. This challenge breaks the journey into four stages, from building your base with a coach to your first half distance and, finally, the full distance. Most first-timers prepare for around a year.",
     highlights: ["Four stages to the full distance", "Coaching and races to book through Véva", `${points.challengeStage} bonus Véva Points per stage`],
-    image: img("1530549387789-4c1017266635"),
+    image: "/images/challenges/road-to-your-first-ironman.jpg",
     booking: { kind: "join" },
     stagesTitle: "Four stages",
     stagesIntro: "Complete them in order, at your own pace.",
@@ -491,7 +491,7 @@ export const experiences: Experience[] = [
     description:
       "A handicap below 20 means you regularly play close to bogey golf. Under the World Handicap System, your handicap index is based on the best 8 of your 20 most recent qualifying scores, so steady improvement pays off. This challenge combines coaching with plenty of rounds on great courses.",
     highlights: ["Four stages from lessons to qualifying rounds", "Lessons and tee times to book through Véva", `${points.challengeStage} bonus Véva Points per stage`],
-    image: img("1535131749006-b7f58c99034b"),
+    image: "/images/challenges/road-to-handicap-below-20.jpg",
     booking: { kind: "join" },
     stagesTitle: "Four stages",
     stagesIntro: "Track your progress round by round.",
