@@ -42,7 +42,7 @@ export default function ChallengeStages({ experience }: { experience: Experience
               {card}
               {related && (
                 <Link href={`/experiences/${related.category}/${related.slug}`} className="mt-4 inline-block border-b border-ink pb-0.5 text-sm">
-                  Book: {related.title}
+                  {related.booking.kind === "external" ? "View event" : "Book"}: {related.title}
                 </Link>
               )}
             </div>

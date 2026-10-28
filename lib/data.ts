@@ -53,11 +53,13 @@ export const categories: Category[] = [
     name: "Sports",
     label: "Challenges, races & play",
     intro:
-      "Take on a Véva challenge, secure your start at marathons and triathlons, book tee times, padel and tennis courts, or compete in tournaments exclusive to Véva members.",
+      "Take on a Véva challenge, discover marathons, triathlons and cycling classics, book tee times, padel and tennis courts, or compete in tournaments exclusive to Véva members.",
     image: "/images/categories/sports.jpg",
     groups: [
       { id: "challenges", name: "Challenges", intro: "Long-term goals, broken down into stages, with bonus Véva Points along the way." },
-      { id: "races", name: "Races", intro: "Marathons, triathlons and Ironman-distance races, with hospitality packages." },
+      { id: "marathon", name: "Marathon", intro: "The great city marathons of the Netherlands." },
+      { id: "triathlon", name: "Triathlon", intro: "IRONMAN and iron-distance triathlons in the Netherlands." },
+      { id: "cycling", name: "Cycling", intro: "Ride the classics on the hills of Limburg." },
       { id: "recreational", name: "Recreational", intro: "Golf, padel and tennis: courts, tee times and lessons." },
       { id: "exclusive", name: "Véva Exclusive Tournaments", intro: "Tournaments organised by Véva, for members only." },
     ],
@@ -98,7 +100,9 @@ export type Booking =
   // No reservations taken: shown as information only
   | { kind: "walk-in"; hours: string }
   // Free sign-up for a Véva challenge
-  | { kind: "join" };
+  | { kind: "join" }
+  // Official event run by another organiser: Véva links to its registration
+  | { kind: "external"; when: string; register: { label: string; href: string } };
 
 export type BookableExperience = Experience & { booking: Extract<Booking, { kind: "slot" | "event" }> };
 export const isBookable = (e: Experience): e is BookableExperience =>
@@ -467,7 +471,7 @@ export const experiences: Experience[] = [
     summary: "From your first training plan to the finish line of a full-distance triathlon.",
     description:
       "A full-distance triathlon means a 3.8 km swim, a 180 km bike ride and a 42.2 km run in a single day. This challenge breaks the journey into four stages, from building your base with a coach to your first half distance and, finally, the full distance. Most first-timers prepare for around a year.",
-    highlights: ["Four stages to the full distance", "Coaching and races to book through Véva", `${points.challengeStage} bonus Véva Points per stage`],
+    highlights: ["Four stages to the full distance", "Coaching and Dutch races in one place", `${points.challengeStage} bonus Véva Points per stage`],
     image: "/images/challenges/road-to-your-first-ironman.jpg",
     booking: { kind: "join" },
     stagesTitle: "Four stages",
@@ -475,8 +479,8 @@ export const experiences: Experience[] = [
     stages: [
       { slug: "base", title: "Build your base", subtitle: "Stage 1", summary: "Start with a movement assessment and a personal training plan with a coach.", image: img("1571019613454-1cb2f99b2d8b"), related: { category: "wellness", slug: "personal-training-amsterdam" } },
       { slug: "first-triathlon", title: "Your first triathlon", subtitle: "Stage 2", summary: "Finish a sprint or olympic-distance triathlon to get used to transitions and open water.", image: img("1517649763962-0c623066013b") },
-      { slug: "half-distance", title: "Half distance", subtitle: "Stage 3", summary: "1.9 km swim, 90 km bike and 21.1 km run: the big test before the full distance.", image: img("1541252260730-0412e8e2108e"), related: { category: "sports", slug: "iron-distance-triathlon-almere" } },
-      { slug: "full-distance", title: "The full distance", subtitle: "Stage 4", summary: "3.8 km swim, 180 km bike and 42.2 km run. Cross the line and call yourself an Ironman.", image: img("1530549387789-4c1017266635"), related: { category: "sports", slug: "iron-distance-triathlon-almere" } },
+      { slug: "half-distance", title: "Half distance", subtitle: "Stage 3", summary: "1.9 km swim, 90 km bike and 21.1 km run: the big test before the full distance.", image: img("1541252260730-0412e8e2108e"), related: { category: "sports", slug: "ironman-70-3-westfriesland" } },
+      { slug: "full-distance", title: "The full distance", subtitle: "Stage 4", summary: "3.8 km swim, 180 km bike and 42.2 km run. Cross the line and call yourself an Ironman.", image: img("1530549387789-4c1017266635"), related: { category: "sports", slug: "challenge-almere-amsterdam" } },
     ],
   },
   {
@@ -503,80 +507,100 @@ export const experiences: Experience[] = [
     ],
   },
 
-  // Sports: races
+  // Sports: marathon, triathlon and cycling (official events; dates come from the organisers)
   {
-    slug: "amsterdam-city-marathon",
+    slug: "tcs-amsterdam-marathon",
     category: "sports",
-    group: "races",
-    title: "Amsterdam city marathon",
-    venue: "Olympic Stadium start",
+    group: "marathon",
+    title: "TCS Amsterdam Marathon",
+    venue: "Olympic Stadium",
     city: "Amsterdam",
-    priceFrom: 110,
-    priceNote: "per runner",
-    summary: "Start and finish in the Olympic Stadium, through the heart of the city.",
+    priceNote: "Entries through the official website",
+    summary: "Start and finish in the Olympic Stadium, past the Rijksmuseum, the Amstel and the Vondelpark.",
     description:
-      "Run past canals, windmills and the Amstel river. Hospitality packages include a heated lounge, massage and a private finish-area meeting point for friends and family.",
-    highlights: ["Guaranteed start number", "VIP lounge and massage", "Finisher photo package"],
-    image: img("1452626038306-9aae5e071dd3"),
+      "One of Europe's fastest marathons, with a World Athletics Platinum Label. The largely flat course starts and finishes in the 1928 Olympic Stadium and takes runners along the Amstel, past the Rijksmuseum and through the Vondelpark. Places sell out quickly, so register as soon as entries open.",
+    highlights: ["Start and finish in the Olympic Stadium", "Flat and fast, Platinum Label", "Half marathon on the same day"],
+    image: img("1534351590666-13e3e96b5017"),
     booking: {
-      kind: "event",
-      date: "2027-10-17",
-      tickets: [
-        { name: "Marathon start", price: 110 },
-        { name: "Half marathon start", price: 75 },
-        { name: "Marathon + hospitality", price: 295 },
-      ],
-      maxGuests: 6,
+      kind: "external",
+      when: "Usually held on a Sunday in mid-October (the 2026 edition was on 18 October).",
+      register: { label: "TCS Amsterdam Marathon website", href: "https://www.tcsamsterdammarathon.eu/" },
     },
   },
   {
-    slug: "iron-distance-triathlon-almere",
+    slug: "nn-marathon-rotterdam",
     category: "sports",
-    group: "races",
-    title: "Iron-distance triathlon",
-    venue: "Weerwater",
-    city: "Almere",
-    priceFrom: 450,
-    priceNote: "per athlete",
-    summary: "3.8 km swim, 180 km bike and 42.2 km run on fast, flat Dutch roads.",
-    description:
-      "One of Europe's longest-running iron-distance races. Véva packages include bike transport, a recovery suite and a reserved spectator area.",
-    highlights: ["Full and half distance", "Bike transport service", "Recovery suite access"],
-    image: img("1530549387789-4c1017266635"),
-    premium: true,
-    booking: {
-      kind: "event",
-      date: "2027-09-11",
-      tickets: [
-        { name: "Full distance", price: 450 },
-        { name: "Half distance", price: 260 },
-        { name: "Spectator hospitality", price: 85 },
-      ],
-      maxGuests: 4,
-    },
-  },
-  {
-    slug: "rotterdam-spring-marathon",
-    category: "sports",
-    group: "races",
-    title: "Spring marathon over the Erasmus Bridge",
+    group: "marathon",
+    title: "NN Marathon Rotterdam",
     venue: "Coolsingel",
     city: "Rotterdam",
-    priceFrom: 95,
-    priceNote: "per runner",
-    summary: "A fast course with an unforgettable crossing of the Erasmus Bridge.",
+    priceNote: "Entries through the official website",
+    summary: "The Netherlands' biggest spring marathon, with the famous crossing of the Erasmus Bridge.",
     description:
-      "The flat route and roaring crowds make this a favourite for personal bests. Choose the full marathon or the 10 km, with optional pacing groups.",
-    highlights: ["Marathon and 10 km", "Pacing groups", "Post-race brunch for members"],
-    image: img("1541252260730-0412e8e2108e"),
+      "Known as the fastest marathon in the Netherlands, Rotterdam's spring classic starts and finishes on the Coolsingel and crosses the Erasmus Bridge, cheered on by huge crowds. The flat course is a favourite for personal bests.",
+    highlights: ["Over the Erasmus Bridge", "Flat course, ideal for a personal best", "Huge crowds along the route"],
+    image: img("1543872084-c7bd3822856f"),
     booking: {
-      kind: "event",
-      date: "2027-04-11",
-      tickets: [
-        { name: "Marathon start", price: 95 },
-        { name: "10 km start", price: 40 },
-      ],
-      maxGuests: 6,
+      kind: "external",
+      when: "Usually held in April. The 2027 edition is listed for the weekend of 10–11 April; check the official website.",
+      register: { label: "NN Marathon Rotterdam website", href: "https://www.nnmarathonrotterdam.nl/" },
+    },
+  },
+  {
+    slug: "ironman-70-3-westfriesland",
+    category: "sports",
+    group: "triathlon",
+    title: "IRONMAN 70.3 Westfriesland",
+    venue: "Historic harbour",
+    city: "Hoorn",
+    priceNote: "Entries through the official website",
+    summary: "A half-distance IRONMAN from the historic harbour of Hoorn, past windmills and Dutch villages.",
+    description:
+      "Swim 1.9 km in Hoorn's old harbour on the Markermeer, ride a flat 90 km loop through the West Frisian countryside past villages and windmills, and run 21.1 km through the historic town centre. A great first IRONMAN-branded race.",
+    highlights: ["1.9 km swim, 90 km bike, 21.1 km run", "Swim in Hoorn's historic harbour", "Flat, scenic course"],
+    image: img("1588952159215-a4b39193464e"),
+    booking: {
+      kind: "external",
+      when: "Usually held in June. The 2027 edition is listed for 20 June; check the official website.",
+      register: { label: "IRONMAN website", href: "https://www.ironman.com/" },
+    },
+  },
+  {
+    slug: "challenge-almere-amsterdam",
+    category: "sports",
+    group: "triathlon",
+    title: "Challenge Almere-Amsterdam",
+    venue: "Weerwater",
+    city: "Almere",
+    priceNote: "Entries through the official website",
+    summary: "The Netherlands' classic full-distance triathlon: 3.8 km swim, 180 km bike, 42.2 km run.",
+    description:
+      "One of Europe's longest-running iron-distance races, held on the flat polder roads around Almere. Choose the full distance or the middle distance. The race runs under the Challenge brand rather than IRONMAN, with the same full distance.",
+    highlights: ["Full and middle distance", "Flat polder course", "Full distance: 226 km in total"],
+    image: img("1530549387789-4c1017266635"),
+    booking: {
+      kind: "external",
+      when: "Usually held in September. The 2027 edition is expected on 11 September; check the official website.",
+      register: { label: "Challenge Almere-Amsterdam website", href: "https://www.challenge-almere.com/" },
+    },
+  },
+  {
+    slug: "amstel-gold-race",
+    category: "sports",
+    group: "cycling",
+    title: "Amstel Gold Race",
+    venue: "South Limburg",
+    city: "Valkenburg",
+    priceNote: "Entries through the official website",
+    summary: "Ride the course of the Dutch cycling classic over the hills of South Limburg, the day before the pros.",
+    description:
+      "The Amstel Gold Race is the Netherlands' biggest one-day cycling classic. The day before the professional race, around 15,000 amateur riders take on the Amstel Gold Race Tourtocht over the same famous climbs, starting and finishing in Valkenburg. Places are allocated by lottery.",
+    highlights: ["Routes from 60 to 240 km", "The famous climbs of South Limburg", "Start and finish in Valkenburg"],
+    image: img("1517649763962-0c623066013b"),
+    booking: {
+      kind: "external",
+      when: "Usually held in April, on the Saturday before the professional race. Places are allocated by lottery.",
+      register: { label: "Amstel Gold Race website", href: "https://www.amstelgoldrace.nl/" },
     },
   },
 

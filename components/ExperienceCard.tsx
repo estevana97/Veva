@@ -25,7 +25,9 @@ export default function ExperienceCard({ experience: e }: { experience: Experien
               ? "Walk-in only"
               : e.booking.kind === "join"
                 ? "Free to join"
-                : "Free reservation"}
+                : e.booking.kind === "external"
+                  ? "Official event"
+                  : "Free reservation"}
         </span>
       </div>
       <p className="mt-1 text-xs uppercase tracking-wider text-muted">

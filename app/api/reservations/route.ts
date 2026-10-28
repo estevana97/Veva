@@ -33,6 +33,9 @@ export async function POST(request: Request) {
   if (booking.kind === "join") {
     return NextResponse.json({ error: "Join this challenge with the challenge sign-up form." }, { status: 400 });
   }
+  if (booking.kind === "external") {
+    return NextResponse.json({ error: "Register for this event on the organiser's website." }, { status: 400 });
+  }
   const guests = Number(body.guests);
   if (!Number.isInteger(guests) || guests < 1 || guests > booking.maxGuests) {
     return NextResponse.json({ error: `Choose between 1 and ${booking.maxGuests}.` }, { status: 400 });
