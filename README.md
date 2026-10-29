@@ -32,6 +32,7 @@ npm run dev        # http://localhost:3000
    Vercel detects Next.js automatically, so click **Deploy**.
 4. Every push to `main` redeploys the site, and every pull request gets its own preview URL.
 5. Optional: add your own domain under *Project → Settings → Domains*.
+6. Server functions (API routes) run in Frankfurt (`fra1`, set in `vercel.json`), next to the Neon database in AWS Europe (Frankfurt).
 
 ## Where to change things
 
