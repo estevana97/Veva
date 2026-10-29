@@ -50,10 +50,20 @@ const path = geoPath(projection).digits(1);
 export default function EuropeMap() {
   return (
     <figure className="w-full">
-      <div className="overflow-hidden rounded-sm border border-[#e6dcc8] bg-[#faf7f1]">
+      <div>
         <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto w-full" role="img" aria-labelledby="map-title">
           <title id="map-title">Véva is live in Amsterdam, coming soon to Madrid, Milan, Zurich and Copenhagen</title>
-          <g fill="#ece2cf" stroke="#d6c7a9" strokeWidth={0.6} strokeLinejoin="round">
+          {/* Fade the land out towards the edges so the map has no hard border */}
+          <defs>
+            <radialGradient id="map-fade" cx="50%" cy="50%" r="50%">
+              <stop offset="70%" stopColor="#fff" />
+              <stop offset="100%" stopColor="#000" />
+            </radialGradient>
+            <mask id="map-mask">
+              <rect width={W} height={H} fill="url(#map-fade)" />
+            </mask>
+          </defs>
+          <g fill="#e9e9e9" stroke="#ffffff" strokeWidth={0.8} strokeLinejoin="round" mask="url(#map-mask)">
             {land.features.map((f, i) => {
               const d = path(f);
               return d ? <path key={i} d={d} /> : null;
@@ -78,7 +88,7 @@ export default function EuropeMap() {
                     <circle cx={x} cy={y} r={7} fill={gold} stroke="#fff" strokeWidth={2} />
                   </>
                 ) : (
-                  <circle cx={x} cy={y} r={5.5} fill="#faf7f1" stroke={gold} strokeWidth={2} />
+                  <circle cx={x} cy={y} r={5.5} fill="#fff" stroke={gold} strokeWidth={2} />
                 )}
                 <text
                   x={x + dx}
