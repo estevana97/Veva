@@ -32,7 +32,7 @@ npm run dev        # http://localhost:3000
    Vercel detects Next.js automatically, so click **Deploy**.
 4. Every push to `main` redeploys the site, and every pull request gets its own preview URL.
 5. Optional: add your own domain under *Project → Settings → Domains*.
-6. Server functions (API routes) run in Frankfurt (`fra1`, set in `vercel.json`), next to the Neon database in AWS Europe (Frankfurt).
+6. Server functions (API routes) run in Frankfurt (`fra1`, set in `vercel.json`). Put the database in the same region.
 
 ## Where to change things
 
@@ -69,9 +69,9 @@ Restaurant pages show a "Véva circle" block with member numbers. Fill them in p
 ## Next steps (not included yet)
 
 - **Database:** reservations are validated and confirmed by `app/api/reservations/route.ts`
-  but not stored. Connect Vercel Postgres, Neon or Supabase there.
+  but not stored. Connect Supabase there.
 - **Points & QR scans:** reservation points are shown on confirmation; storing balances, crediting spend
   points when a venue scans the QR code (or a receipt is uploaded) and the social feed need a database and accounts.
 - **Emails:** send confirmations with Resend or Postmark (see the TODOs in the API routes).
-- **Accounts:** the login page is UI only. Add Auth.js, Clerk or Supabase Auth.
+- **Accounts:** the login page is UI only. Add Supabase Auth.
 - **Payments:** add Stripe Checkout or Mollie (popular in the Netherlands) before confirming a booking.
