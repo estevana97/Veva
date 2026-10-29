@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import AppPreview from "@/components/AppPreview";
 import HeroVideo from "@/components/HeroVideo";
-import Photo from "@/components/Photo";
 import NewsletterForm from "@/components/NewsletterForm";
-import { experiences, images } from "@/lib/data";
+import { images } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Join the community" };
 
@@ -16,8 +16,6 @@ const features = [
 ];
 
 export default function CommunityPage() {
-  const post = experiences.find((e) => e.slug === "signature-spa-ritual") ?? experiences[0];
-
   return (
     <>
       <HeroVideo video={images.communityVideo}>
@@ -46,32 +44,15 @@ export default function CommunityPage() {
               Posts from confirmed visits carry a <strong>verified</strong> label, so you know that recommendations
               come from people who were really there.
             </p>
+            <p>
+              Take a sneak peek of the app: scroll through the feed, like a post, and tap through Discover, Reserve,
+              Search and your own profile.
+            </p>
           </div>
         </div>
 
-        {/* Example post */}
-        <article className="mx-auto w-full max-w-sm border border-line">
-          <header className="flex items-center gap-3 p-4">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-ink font-serif text-sm text-white">M</div>
-            <div className="flex-1 text-sm">
-              <p className="font-medium">Maria</p>
-              <p className="text-xs text-muted">
-                {post.venue} · {post.city}
-              </p>
-            </div>
-            <span className="border border-ink px-2 py-0.5 text-[10px] uppercase tracking-wider">✓ Verified visit</span>
-          </header>
-          <div className="relative aspect-square">
-            <Photo src={post.image} alt={post.title} sizes="384px" />
-          </div>
-          <div className="space-y-2 p-4 text-sm">
-            <p>
-              <span className="font-medium">Maria</span> Two hours of pure calm, then tea in the thermal area with a
-              view of the dunes. Already booked my next visit.
-            </p>
-            <p className="text-xs text-muted">24 likes · 5 comments · earned 265 Véva Points</p>
-          </div>
-        </article>
+        {/* Interactive sneak peek of the app */}
+        <AppPreview />
       </section>
 
       <section className="container-page mt-28 grid gap-x-10 gap-y-12 text-center sm:grid-cols-2 lg:grid-cols-3">
