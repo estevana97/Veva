@@ -79,13 +79,14 @@ export default function CategoryPage({ params, searchParams }: Props) {
               {g.subgroups ? (
                 (() => {
                   const open = g.subgroups.find((sg) => sg.id === sub);
-                  // One subsection opened: show its races
+                  // One subsection opened: show its items
+                  const [one, many] = g.itemLabel ?? ["experience", "experiences"];
                   if (open) {
                     const items = list.filter((e) => e.subgroup === open.id);
                     return (
                       <div className="mt-10">
                         <Link href={href({ type: g.id, sub: undefined })} className="text-sm text-muted hover:text-ink" scroll={false}>
-                          ← All {g.name.toLowerCase()}
+                          ← Back to {g.name}
                         </Link>
                         <h3 className="mt-4 text-2xl">{open.name}</h3>
                         <p className="mt-1 text-sm text-muted">{open.intro}</p>
@@ -94,7 +95,7 @@ export default function CategoryPage({ params, searchParams }: Props) {
                             <ExperienceCard key={e.slug} experience={e} />
                           ))}
                         </div>
-                        {items.length === 0 && <p className="mt-8 text-muted">No races in this city yet.</p>}
+                        {items.length === 0 && <p className="mt-8 text-muted">No {many} in this city yet.</p>}
                       </div>
                     );
                   }
@@ -116,11 +117,11 @@ export default function CategoryPage({ params, searchParams }: Props) {
                             <div className="mt-5 flex items-baseline justify-between gap-4">
                               <h3 className="text-2xl">{sg.name}</h3>
                               <span className="shrink-0 text-xs text-muted">
-                                {count} {count === 1 ? "race" : "races"}
+                                {count} {count === 1 ? one : many}
                               </span>
                             </div>
                             <p className="mt-2 text-sm text-ink/80">{sg.intro}</p>
-                            <span className="mt-4 inline-block border-b border-ink pb-0.5 text-sm">View races</span>
+                            <span className="mt-4 inline-block border-b border-ink pb-0.5 text-sm">View {many}</span>
                           </Link>
                         );
                       })}

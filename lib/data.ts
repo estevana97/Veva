@@ -26,7 +26,14 @@ export const reservationPoints = (e: Experience) =>
 export type CategorySlug = "dining" | "sports" | "culture" | "wellness";
 
 export type Subgroup = { id: string; name: string; intro: string; image: string };
-export type Group = { id: string; name: string; intro: string; subgroups?: Subgroup[] };
+export type Group = {
+  id: string;
+  name: string;
+  intro: string;
+  subgroups?: Subgroup[];
+  // How subsection items are counted, e.g. ["race", "races"]
+  itemLabel?: [string, string];
+};
 
 export type Category = {
   slug: CategorySlug;
@@ -64,13 +71,24 @@ export const categories: Category[] = [
         id: "races",
         name: "Races",
         intro: "Official marathons, triathlons and cycling classics in the Netherlands.",
+        itemLabel: ["race", "races"],
         subgroups: [
           { id: "marathon", name: "Marathon", intro: "The great city marathons of the Netherlands.", image: "/images/races/nn-marathon-rotterdam.jpg" },
           { id: "triathlon", name: "Triathlon", intro: "IRONMAN and iron-distance triathlons in the Netherlands.", image: "/images/challenges/road-to-your-first-ironman.jpg" },
           { id: "cycling", name: "Cycling", intro: "Ride the classics on the hills of Limburg.", image: "/images/races/amstel-gold-race.jpg" },
         ],
       },
-      { id: "recreational", name: "Recreational", intro: "Golf, padel and tennis: courts, tee times and lessons." },
+      {
+        id: "recreational",
+        name: "Recreational",
+        intro: "Golf, padel and tennis: courts, tee times and lessons.",
+        itemLabel: ["option", "options"],
+        subgroups: [
+          { id: "golf", name: "Golf", intro: "Tee times and lessons at the Netherlands' finest courses.", image: "/images/challenges/road-to-handicap-below-20.jpg" },
+          { id: "padel", name: "Padel", intro: "Premium courts, rackets and clinics.", image: img("1626224583764-f87db24ac4ea") },
+          { id: "tennis", name: "Tennis", intro: "Clay courts and private lessons at classic clubs.", image: img("1554068865-24cecd4e34b8") },
+        ],
+      },
       { id: "exclusive", name: "Véva Exclusive Tournaments", intro: "Tournaments organised by Véva, for members only." },
     ],
   },
@@ -625,6 +643,7 @@ export const experiences: Experience[] = [
     slug: "golf-tee-time-hilversum",
     category: "sports",
     group: "recreational",
+    subgroup: "golf",
     title: "18-hole tee time",
     venue: "Heidegolf Club",
     city: "Hilversum",
@@ -641,6 +660,7 @@ export const experiences: Experience[] = [
     slug: "golf-clinic-noordwijk",
     category: "sports",
     group: "recreational",
+    subgroup: "golf",
     title: "Private golf lesson on the links",
     venue: "Duinen Golf",
     city: "Noordwijk",
@@ -657,6 +677,7 @@ export const experiences: Experience[] = [
     slug: "padel-court-amsterdam",
     category: "sports",
     group: "recreational",
+    subgroup: "padel",
     title: "Indoor padel court",
     venue: "Padel Club Zuid",
     city: "Amsterdam",
@@ -721,6 +742,7 @@ export const experiences: Experience[] = [
     slug: "tennis-court-laren",
     category: "sports",
     group: "recreational",
+    subgroup: "tennis",
     title: "Tennis court & private lesson",
     venue: "Tennispark De Brink",
     city: "Laren",
