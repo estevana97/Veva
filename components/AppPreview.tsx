@@ -300,6 +300,20 @@ function You() {
         <p className="mt-1 text-[9px]">8,760 points to Diamond vanguard</p>
       </div>
 
+      {/* Milestones */}
+      <ul className="mt-3 divide-y divide-line rounded-xl border border-line px-3 text-[11px]">
+        {[
+          { icon: <path d="M7 3v8a3 3 0 0 0 6 0V3M10 3v18M17 3c-1.5 2-2 4-2 7h2v11" />, text: "Went to 14 different restaurants" },
+          { icon: <><path d="M5 20 9 8l4 6 2-3 4 9z" /><circle cx="15" cy="5" r="2" /></>, text: "Completed 3 marathons and 5 half marathons" },
+          { icon: <><path d="M8 21V3l9 4-9 4" /><path d="M5 21h8" /></>, text: "Current handicap: 25" },
+        ].map((m) => (
+          <li key={m.text} className="flex items-center gap-2.5 py-2">
+            <Icon className="h-4 w-4 shrink-0 text-muted">{m.icon}</Icon>
+            {m.text}
+          </li>
+        ))}
+      </ul>
+
       <div className="mt-3 rounded-xl border border-line p-3">
         <p className="text-[11px] font-medium">Road to the European Marathon Classics medal</p>
         <div className="mt-2 flex gap-1">
