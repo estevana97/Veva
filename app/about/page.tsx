@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import Photo from "@/components/Photo";
-import { images } from "@/lib/data";
+import EuropeMap from "@/components/EuropeMap";
 
 export const metadata: Metadata = { title: "About" };
 
@@ -33,11 +32,12 @@ export default function AboutPage() {
               And because every experience shared on Véva is linked to a real reservation, our community is built on
               authentic moments, not borrowed lifestyles.
             </p>
+            <p>
+              We started in Amsterdam, and Madrid, Milan, Zurich and Copenhagen are next.
+            </p>
           </div>
         </div>
-        <div className="relative aspect-[4/5] w-full">
-          <Photo src={images.about} alt="A carefully plated dish" sizes="(min-width: 1024px) 50vw, 100vw" />
-        </div>
+        <EuropeMap />
       </section>
 
       <section id="partners" className="container-page mt-28 scroll-mt-20 border-t border-line pt-16">
