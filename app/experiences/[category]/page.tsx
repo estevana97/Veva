@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import ExperienceCard from "@/components/ExperienceCard";
 import Photo from "@/components/Photo";
 import PageHeader from "@/components/PageHeader";
-import { categories, getCategory, getExperiences } from "@/lib/data";
+import { categories, cityOf, countryOf, getCategory, getExperiences, type Experience } from "@/lib/data";
 
-type Props = { params: { category: string }; searchParams: { city?: string; type?: string; sub?: string } };
+type Props = { params: { category: string }; searchParams: { country?: string; city?: string; type?: string; sub?: string } };
 
 export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
@@ -21,16 +21,34 @@ export default function CategoryPage({ params, searchParams }: Props) {
   if (!category) notFound();
 
   const all = getExperiences(category.slug);
-  const cities = Array.from(new Set(all.map((e) => e.city))).sort();
   const { city, type, sub } = searchParams;
+  // Older links may only have a city: derive its country from that city
+  const fromCity = city ? all.find((e) => cityOf(e) === city) : undefined;
+  const country = searchParams.country ?? (fromCity ? countryOf(fromCity) : undefined);
+
+  const countries = Array.from(new Set(all.map(countryOf))).sort((a, b) =>
+    a === "International" ? 1 : b === "International" ? -1 : a.localeCompare(b),
+  );
+  const allCities = new Set(all.map(cityOf).filter(Boolean));
+  const citiesIn = (c: string) =>
+    Array.from(new Set(all.filter((e) => countryOf(e) === c).map(cityOf).filter((x): x is string => !!x))).sort();
+  const showLocation = countries.length > 1 || allCities.size > 1;
+  const matches = (e: Experience) => (!country || countryOf(e) === country) && (!city || cityOf(e) === city);
   const groups = category.groups.filter((g) => !type || g.id === type);
 
-  // Changing the group clears the subsection; changing the city keeps it
-  const href = (next: { city?: string; type?: string; sub?: string }) => {
+  // Changing the group clears the subsection; changing the country clears the city
+  const href = (next: { country?: string; city?: string; type?: string; sub?: string }) => {
     const q = new URLSearchParams();
-    const merged = { city, type, sub: "type" in next ? undefined : sub, ...next };
+    const merged = {
+      country,
+      city: "country" in next ? undefined : city,
+      type,
+      sub: "type" in next ? undefined : sub,
+      ...next,
+    };
     if (merged.type) q.set("type", merged.type);
     if (merged.sub) q.set("sub", merged.sub);
+    if (merged.country) q.set("country", merged.country);
     if (merged.city) q.set("city", merged.city);
     const s = q.toString();
     return `/experiences/${category.slug}${s ? `?${s}` : ""}`;
@@ -54,12 +72,25 @@ export default function CategoryPage({ params, searchParams }: Props) {
             </Link>
           ))}
         </div>
-        {cities.length > 1 && (
+        {showLocation && (
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+            <Link href={href({ country: undefined })} className={chip(!country)} scroll={false}>
+              All countries
+            </Link>
+            {countries.map((c) => (
+              <Link key={c} href={href({ country: c })} className={chip(country === c)} scroll={false}>
+                {c}
+              </Link>
+            ))}
+          </div>
+        )}
+        {/* Cities appear once a country is chosen */}
+        {country && citiesIn(country).length > 1 && (
           <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
             <Link href={href({ city: undefined })} className={chip(!city)} scroll={false}>
-              All cities
+              All of {country === "Netherlands" ? "the Netherlands" : country}
             </Link>
-            {cities.map((c) => (
+            {citiesIn(country).map((c) => (
               <Link key={c} href={href({ city: c })} className={chip(city === c)} scroll={false}>
                 {c}
               </Link>
@@ -68,7 +99,7 @@ export default function CategoryPage({ params, searchParams }: Props) {
         )}
 
         {groups.map((g) => {
-          const list = all.filter((e) => e.group === g.id && (!city || e.city === city));
+          const list = all.filter((e) => e.group === g.id && matches(e));
           if (list.length === 0) return null;
           return (
             <section key={g.id} id={g.id} className="mt-20 scroll-mt-20">
@@ -95,7 +126,7 @@ export default function CategoryPage({ params, searchParams }: Props) {
                             <ExperienceCard key={e.slug} experience={e} />
                           ))}
                         </div>
-                        {items.length === 0 && <p className="mt-8 text-muted">No {many} in this city yet.</p>}
+                        {items.length === 0 && <p className="mt-8 text-muted">No {many} here yet.</p>}
                       </div>
                     );
                   }
@@ -139,7 +170,7 @@ export default function CategoryPage({ params, searchParams }: Props) {
           );
         })}
 
-        {groups.every((g) => !all.some((e) => e.group === g.id && (!city || e.city === city))) && (
+        {groups.every((g) => !all.some((e) => e.group === g.id && matches(e))) && (
           <p className="mt-16 text-center text-muted">No experiences match these filters yet.</p>
         )}
 

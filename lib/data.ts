@@ -1073,6 +1073,13 @@ export const tiers: Tier[] = [
 // Short city codes shown as a badge on restaurant photos
 export const cityCodes: Record<string, string> = { Amsterdam: "AMS" };
 
+// Location filters. Cities not listed here are in the Netherlands; add new ones as Véva expands, e.g. Madrid: "Spain".
+const cityCountry: Record<string, string> = { Europe: "International" };
+// Region names used as a "city" for experiences that span several places
+const regionsOnly = new Set(["Europe", "Netherlands"]);
+export const countryOf = (e: Experience) => cityCountry[e.city] ?? "Netherlands";
+export const cityOf = (e: Experience) => (regionsOnly.has(e.city) ? undefined : e.city);
+
 export const getCategory = (slug: string) => categories.find((c) => c.slug === slug);
 export const getExperiences = (slug: string) => experiences.filter((e) => e.category === slug);
 export const getExperience = (category: string, slug: string) =>

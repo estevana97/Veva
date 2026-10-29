@@ -52,6 +52,9 @@ images are Unsplash URLs. To replace a photo, add a file under `public/images/` 
 The home page background video is `public/videos/home-hero-aerial.mp4` (+ `.webm` fallback and
 `public/images/home-hero-aerial-poster.jpg` still), set in `lib/data.ts` (`homeVideo`).
 
+Countries for the location filter come from `cityCountry` in `lib/data.ts`: cities not listed there count as the
+Netherlands, so add new cities with their country (e.g. `Madrid: "Spain"`) as Véva expands.
+
 Restaurant pages show a "Véva circle" block with member numbers. Fill them in per restaurant with
 `memberStats: { visits: 120, recommend: 96 }` in `lib/data.ts`; until then they show `[x]`.
 
@@ -59,7 +62,7 @@ Restaurant pages show a "Véva circle" block with member numbers. Fill them in p
 
 - `/` home: hero, categories, how it works, rewards teaser
 - `/experiences`: "Our experiences" overview
-- `/experiences/[category]`: experiences grouped by type, with type and city filters
+- `/experiences/[category]`: experiences grouped by type, with type, country and city filters (cities appear after choosing a country)
 - `/experiences/[category]/[slug]`: detail page with reservation form, Véva Points and QR code (challenges: sign-up form and stages)
 - `/experiences/sports/[challenge]/[stage]`: challenge stage pages, e.g. each European Marathon Classics city
 - `/rewards`: how to earn and use Véva Points, Bronze explorer, Silver circle, Gold elite, Diamond vanguard
