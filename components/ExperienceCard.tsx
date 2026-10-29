@@ -21,12 +21,14 @@ export default function ExperienceCard({ experience: e }: { experience: Experien
         <span className="shrink-0 text-xs text-muted">
           {e.priceFrom !== undefined
             ? `from ${formatEuro(e.priceFrom)}`
+            : e.priceLabel
+              ? e.priceLabel
             : e.booking.kind === "walk-in"
               ? "Walk-in only"
               : e.booking.kind === "join"
                 ? "Free to join"
                 : e.booking.kind === "external"
-                  ? "Official event"
+                  ? (e.booking.heading ?? "Official event")
                   : "Free reservation"}
         </span>
       </div>

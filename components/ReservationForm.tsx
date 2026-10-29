@@ -65,12 +65,20 @@ export default function ReservationForm({ experience }: { experience: BookableEx
   if (confirmation) {
     return (
       <div className="mt-6 space-y-3 text-sm">
-        <p className="font-serif text-xl">Your reservation is confirmed.</p>
+        <p className="font-serif text-xl">
+          {experience.priceLabel ? "Your request has been received." : "Your reservation is confirmed."}
+        </p>
         <p>{confirmation.summary}</p>
         <p>
           Reference: <span className="font-medium">{confirmation.reference}</span>
         </p>
-        <p>{confirmation.total > 0 ? `Estimated total: ${formatEuro(confirmation.total)}` : "You pay at the venue."}</p>
+        <p>
+          {confirmation.total > 0
+            ? `Estimated total: ${formatEuro(confirmation.total)}`
+            : experience.priceLabel
+              ? "We'll confirm availability and the price by email."
+              : "You pay at the venue."}
+        </p>
         <p>
           You earned <strong>{confirmation.points} Véva Points</strong> for this reservation.
         </p>
@@ -163,13 +171,13 @@ export default function ReservationForm({ experience }: { experience: BookableEx
 
       <div className="flex items-center justify-between border-t border-line pt-4 text-sm">
         <span className="text-muted">{unitPrice !== undefined ? "Estimated total" : "Reservation"}</span>
-        <span className="font-serif text-lg">{unitPrice !== undefined ? formatEuro(total) : "Free"}</span>
+        <span className="font-serif text-lg">{unitPrice !== undefined ? formatEuro(total) : experience.priceLabel ?? "Free"}</span>
       </div>
 
       {error && <p className="text-sm text-red-700">{error}</p>}
 
       <button type="submit" disabled={status === "sending"} className="btn-solid w-full disabled:opacity-60">
-        {status === "sending" ? "Reserving…" : "Reserve"}
+        {status === "sending" ? "Sending…" : experience.priceLabel ? "Send request" : "Reserve"}
       </button>
       <p className="text-center text-xs text-muted">Free cancellation up to 48 hours before.</p>
     </form>

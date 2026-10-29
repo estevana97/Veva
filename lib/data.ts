@@ -100,7 +100,17 @@ export const categories: Category[] = [
       "Private museum tours and art viewings, the best seats at the theatre, opera and concerts, and VIP access to festivals and galas.",
     image: "/images/categories/culture.jpg",
     groups: [
-      { id: "museums-art", name: "Museums & art", intro: "Private tours, skip-the-line access, private viewings and workshops." },
+      {
+        id: "museums-art",
+        name: "Museums & art",
+        intro: "Entrance tickets and private tours at the Netherlands' finest museums.",
+        itemLabel: ["option", "options"],
+        subgroups: [
+          { id: "rijksmuseum", name: "Rijksmuseum", intro: "Rembrandt, Vermeer and 800 years of Dutch art and history.", image: "/images/museums/rijksmuseum.jpg" },
+          { id: "van-gogh-museum", name: "Van Gogh Museum", intro: "The world's largest collection of works by Vincent van Gogh.", image: "/images/museums/van-gogh-museum.jpg" },
+          { id: "museum-voorlinden", name: "Museum Voorlinden", intro: "Modern and contemporary art on a country estate near the dunes.", image: "/images/museums/museum-voorlinden.jpg" },
+        ],
+      },
       { id: "performances", name: "Theatre, opera & concerts", intro: "Premium seats and private boxes for live performances." },
       { id: "festivals-galas", name: "Festivals & galas", intro: "VIP festival access and exclusive cultural evenings." },
     ],
@@ -130,7 +140,7 @@ export type Booking =
   // Free sign-up for a Véva challenge
   | { kind: "join" }
   // Official event run by another organiser: Véva links to its registration
-  | { kind: "external"; when: string; register: { label: string; href: string } };
+  | { kind: "external"; when: string; register: { label: string; href: string }; heading?: string; button?: string };
 
 export type BookableExperience = Experience & { booking: Extract<Booking, { kind: "slot" | "event" }> };
 export const isBookable = (e: Experience): e is BookableExperience =>
@@ -160,6 +170,7 @@ export type Experience = {
   city: string;
   priceFrom?: number; // leave out for free table reservations
   priceNote: string;
+  priceLabel?: string; // shown instead of a price, e.g. "Price on request"
   summary: string;
   description: string;
   highlights: string[];
@@ -756,55 +767,126 @@ export const experiences: Experience[] = [
     booking: { kind: "slot", times: ["08:00", "09:00", "10:00", "17:00", "18:00", "19:00"], maxGuests: 4, unit: "Players" },
   },
 
-  // Culture: museums & art
+  // Culture: museums & art (entrance through the official websites; private tours on request)
   {
-    slug: "old-masters-private-tour",
+    slug: "rijksmuseum-entrance",
     category: "culture",
     group: "museums-art",
-    title: "Old Masters private tour",
-    venue: "National museum",
+    subgroup: "rijksmuseum",
+    title: "Rijksmuseum: entrance ticket",
+    venue: "Museumplein",
     city: "Amsterdam",
-    priceFrom: 75,
-    priceNote: "per person",
-    summary: "Explore the Golden Age before opening hours with an art historian.",
+    priceNote: "Tickets through the museum's official website",
+    summary: "See The Night Watch and Vermeer's Milkmaid in the Netherlands' national museum.",
     description:
-      "A 90-minute private tour before opening hours, focusing on the great Dutch painters of the 17th century. Finish with coffee in the museum garden.",
-    highlights: ["Before-hours access", "Private art historian", "Coffee and pastry"],
-    image: img("1566127444979-b3d2b654e3d7"),
+      "The Rijksmuseum tells 800 years of Dutch art and history, from the masterpieces of the Golden Age by Rembrandt and Vermeer to Delftware, ship models and the Cuypers library. Book a timed ticket online before your visit.",
+    highlights: ["Rembrandt's The Night Watch", "Vermeer's The Milkmaid", "Timed tickets, booked online"],
+    image: "/images/museums/rijksmuseum.jpg",
+    booking: {
+      kind: "external",
+      when: "Timed tickets, booked online in advance. The museum advises buying through its own website.",
+      register: { label: "Rijksmuseum website", href: "https://www.rijksmuseum.nl/en" },
+      heading: "Official tickets",
+      button: "Buy tickets on the official website",
+    },
+  },
+  {
+    slug: "rijksmuseum-private-tour",
+    category: "culture",
+    group: "museums-art",
+    subgroup: "rijksmuseum",
+    title: "Rijksmuseum: private tour",
+    venue: "Museumplein",
+    city: "Amsterdam",
+    priceLabel: "Price on request",
+    priceNote: "We confirm availability and the price by email",
+    summary: "Discover the Golden Age with a private guide, at your own pace.",
+    description:
+      "Explore the highlights of the collection with a private guide for you and your guests, from The Night Watch to the Gallery of Honour. Véva arranges the guide and your entrance; we confirm availability and the price by email.",
+    highlights: ["Private guide for your group", "Entrance arranged for you", "Up to 8 guests"],
+    image: "/images/museums/rijksmuseum.jpg",
     premium: true,
-    booking: { kind: "slot", times: ["08:00", "08:30", "17:30"], maxGuests: 8, unit: "Guests" },
+    booking: { kind: "slot", times: ["09:00", "11:00", "14:00"], maxGuests: 8, unit: "Guests" },
   },
   {
-    slug: "modern-art-skip-the-line",
+    slug: "van-gogh-museum-entrance",
     category: "culture",
     group: "museums-art",
-    title: "Modern art, skip-the-line",
-    venue: "Museum of modern art",
-    city: "Rotterdam",
-    priceFrom: 28,
-    priceNote: "per person",
-    summary: "Timed entry with priority access to the current exhibition.",
+    subgroup: "van-gogh-museum",
+    title: "Van Gogh Museum: entrance ticket",
+    venue: "Museumplein",
+    city: "Amsterdam",
+    priceNote: "Tickets through the museum's official website",
+    summary: "The world's largest collection of works by Vincent van Gogh, on Museumplein.",
     description:
-      "Walk straight in to the season's headline exhibition. Add an audio guide or a curator talk on Thursday evenings.",
-    highlights: ["Priority timed entry", "Audio guide included", "Curator talks on Thursdays"],
-    image: img("1518998053901-5348d3961a04"),
-    booking: { kind: "slot", times: ["10:00", "11:00", "12:00", "14:00", "15:00", "16:00"], maxGuests: 10, unit: "Guests" },
+      "Follow Van Gogh's life and work through paintings, drawings and letters, from The Potato Eaters to Sunflowers. Tickets are for a fixed time slot and sell out quickly, so book well ahead.",
+    highlights: ["Sunflowers and The Potato Eaters", "Paintings, drawings and letters", "Book a time slot well ahead"],
+    image: "/images/museums/van-gogh-museum.jpg",
+    booking: {
+      kind: "external",
+      when: "Every visitor needs a ticket for a specific time slot, and they often sell out weeks ahead. There are no tickets at the door.",
+      register: { label: "Van Gogh Museum website", href: "https://www.vangoghmuseum.nl/en" },
+      heading: "Official tickets",
+      button: "Buy tickets on the official website",
+    },
   },
   {
-    slug: "painting-workshop-haarlem",
+    slug: "van-gogh-museum-private-tour",
     category: "culture",
     group: "museums-art",
-    title: "Painting workshop at the museum",
-    venue: "Museum of Dutch painting",
-    city: "Haarlem",
-    priceFrom: 65,
-    priceNote: "per person",
-    summary: "Study a masterpiece, then paint your own interpretation in the studio.",
+    subgroup: "van-gogh-museum",
+    title: "Van Gogh Museum: private tour",
+    venue: "Museumplein",
+    city: "Amsterdam",
+    priceLabel: "Price on request",
+    priceNote: "We confirm availability and the price by email",
+    summary: "See Van Gogh's masterpieces with a private guide who brings his story to life.",
     description:
-      "After a short tour of the collection, a resident artist guides you through the techniques of the Dutch masters in the museum's studio. All materials included.",
-    highlights: ["Short private tour", "Three-hour studio session", "Take your canvas home"],
-    image: img("1460661419201-fd4cecdf8a8b"),
-    booking: { kind: "slot", times: ["10:00", "14:00"], maxGuests: 6, unit: "Guests" },
+      "A private guide takes you through Van Gogh's life, from the dark early works to the bright colours of the south of France. Véva arranges the guide and your time slot; we confirm availability and the price by email.",
+    highlights: ["Private guide for your group", "Time slot arranged for you", "Up to 8 guests"],
+    image: "/images/museums/van-gogh-museum.jpg",
+    premium: true,
+    booking: { kind: "slot", times: ["09:00", "11:00", "14:00"], maxGuests: 8, unit: "Guests" },
+  },
+  {
+    slug: "museum-voorlinden-entrance",
+    category: "culture",
+    group: "museums-art",
+    subgroup: "museum-voorlinden",
+    title: "Museum Voorlinden: entrance ticket",
+    venue: "Voorlinden estate",
+    city: "Wassenaar",
+    priceNote: "Tickets through the museum's official website",
+    summary: "Modern and contemporary art in a light-filled museum on a country estate near The Hague.",
+    description:
+      "Set on the Voorlinden estate between the dunes and woodland near Wassenaar, the museum shows modern and contemporary art in bright, daylit galleries, surrounded by gardens to walk through after your visit.",
+    highlights: ["Daylit galleries", "Estate gardens and dunes", "Open daily, 11:00 to 17:00"],
+    image: "/images/museums/museum-voorlinden.jpg",
+    booking: {
+      kind: "external",
+      when: "Open every day from 11:00 to 17:00. Tickets online or at the desk; no time slot needed. The museum is cash-free.",
+      register: { label: "Museum Voorlinden website", href: "https://www.voorlinden.nl/?lang=en" },
+      heading: "Official tickets",
+      button: "Buy tickets on the official website",
+    },
+  },
+  {
+    slug: "museum-voorlinden-private-tour",
+    category: "culture",
+    group: "museums-art",
+    subgroup: "museum-voorlinden",
+    title: "Museum Voorlinden: private tour",
+    venue: "Voorlinden estate",
+    city: "Wassenaar",
+    priceLabel: "Price on request",
+    priceNote: "We confirm availability and the price by email",
+    summary: "Discover the collection and the estate with a private guide.",
+    description:
+      "A private guide introduces you to the collection and the architecture, followed by time to explore the gardens on your own. Véva arranges the visit; we confirm availability and the price by email.",
+    highlights: ["Private guide for your group", "Collection and gardens", "Up to 8 guests"],
+    image: "/images/museums/museum-voorlinden.jpg",
+    premium: true,
+    booking: { kind: "slot", times: ["11:00", "13:00", "15:00"], maxGuests: 8, unit: "Guests" },
   },
 
   // Culture: theatre, opera & concerts

@@ -4,7 +4,7 @@ A social reservation platform with a loyalty program for curated experiences in 
 
 - **Dining** (Amsterdam): fine dining, bistros & brasseries, wine bars & tapas
 - **Sports**: challenges, races (marathon, triathlon, cycling), recreational (golf, padel, tennis) and Véva Exclusive Tournaments
-- **Culture**: museums & art, theatre/opera/concerts, festivals & galas
+- **Culture**: museums (Rijksmuseum, Van Gogh Museum, Museum Voorlinden), theatre/opera/concerts, festivals & galas
 - **Wellness**: spa & treatments, yoga & mindfulness, personal training
 
 Members earn **Véva Points** for every reservation (plus a premium bonus) and for what they spend at the venue,

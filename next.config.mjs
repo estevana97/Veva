@@ -10,6 +10,10 @@ const nextConfig = {
       { source: "/experiences/restaurants", destination: "/experiences/dining", permanent: true },
       { source: "/experiences/events/:path*", destination: "/experiences/sports?type=races", permanent: true },
       { source: "/experiences/events", destination: "/experiences/sports?type=races", permanent: true },
+      // Museum pages replaced by Rijksmuseum, Van Gogh Museum and Museum Voorlinden
+      { source: "/experiences/culture/old-masters-private-tour", destination: "/experiences/culture/rijksmuseum-private-tour", permanent: true },
+      { source: "/experiences/culture/modern-art-skip-the-line", destination: "/experiences/culture?type=museums-art", permanent: true },
+      { source: "/experiences/culture/painting-workshop-haarlem", destination: "/experiences/culture?type=museums-art", permanent: true },
       // Race pages replaced by official events
       { source: "/experiences/sports/amsterdam-city-marathon", destination: "/experiences/sports/tcs-amsterdam-marathon", permanent: true },
       { source: "/experiences/sports/rotterdam-spring-marathon", destination: "/experiences/sports/nn-marathon-rotterdam", permanent: true },

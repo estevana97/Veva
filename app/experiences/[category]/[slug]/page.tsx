@@ -106,7 +106,7 @@ export default function ExperiencePage({ params }: Props) {
             ) : experience.booking.kind === "external" ? (
               <>
                 <p className="font-serif text-2xl">
-                  Official event <span className="block font-sans text-sm text-muted">{experience.priceNote}</span>
+                  {experience.booking.heading ?? "Official event"} <span className="block font-sans text-sm text-muted">{experience.priceNote}</span>
                 </p>
                 <p className="mt-6 text-sm">{experience.booking.when}</p>
                 <a
@@ -115,11 +115,13 @@ export default function ExperiencePage({ params }: Props) {
                   rel="noopener noreferrer"
                   className="btn-solid mt-6 w-full"
                 >
-                  Register on the official website
+                  {experience.booking.button ?? "Register on the official website"}
                 </a>
                 <p className="mt-3 text-center text-xs text-muted">{experience.booking.register.label}</p>
                 <p className="mt-6 border-l-2 border-ink pl-3 text-xs leading-relaxed">
-                  Share your finish in the Véva app to count it toward your Véva challenges and earn bonus Véva Points.
+                  {experience.category === "sports"
+                    ? "Share your finish in the Véva app to count it toward your Véva challenges and earn bonus Véva Points."
+                    : `Upload your receipt in the Véva app after your visit to earn ${points.perEuro} Véva Point per €1 you spend.`}
                 </p>
               </>
             ) : experience.booking.kind === "join" ? (
@@ -147,7 +149,8 @@ export default function ExperiencePage({ params }: Props) {
                   </p>
                 ) : (
                   <p className="font-serif text-2xl">
-                    Reserve a table <span className="block font-sans text-sm text-muted">{experience.priceNote}</span>
+                    {experience.priceLabel ?? "Reserve a table"}{" "}
+                    <span className="block font-sans text-sm text-muted">{experience.priceNote}</span>
                   </p>
                 )}
                 <p className="mt-3 border-l-2 border-ink pl-3 text-xs leading-relaxed">
